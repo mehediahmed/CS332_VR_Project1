@@ -13,24 +13,10 @@ namespace VRTK
         private VRTK_BasicTeleport basicTeleport;
         private VRTK_HeadsetControllerAware headset;
 
-        protected virtual void OnEnable()
+        private void OnEnable()
         {
             basicTeleport = GetComponent<VRTK_BasicTeleport>();
             StartCoroutine(EnableAtEndOfFrame());
-        }
-
-        protected virtual void OnDisable()
-        {
-            if (basicTeleport == null)
-            {
-                return;
-            }
-
-            if (headset)
-            {
-                headset.ControllerObscured -= new HeadsetControllerAwareEventHandler(DisableTeleport);
-                headset.ControllerUnobscured -= new HeadsetControllerAwareEventHandler(EnableTeleport);
-            }
         }
 
         private IEnumerator EnableAtEndOfFrame()
@@ -46,6 +32,20 @@ namespace VRTK
             {
                 headset.ControllerObscured += new HeadsetControllerAwareEventHandler(DisableTeleport);
                 headset.ControllerUnobscured += new HeadsetControllerAwareEventHandler(EnableTeleport);
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (basicTeleport == null)
+            {
+                return;
+            }
+
+            if (headset)
+            {
+                headset.ControllerObscured -= new HeadsetControllerAwareEventHandler(DisableTeleport);
+                headset.ControllerUnobscured -= new HeadsetControllerAwareEventHandler(EnableTeleport);
             }
         }
 

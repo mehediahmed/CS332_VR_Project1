@@ -34,26 +34,23 @@ namespace VRTK
         public bool openInward = false;
         [Tooltip("Can the door be pushed to open.")]
         public bool openOutward = true;
-        [Tooltip("The range at which the door must be to being closed before it snaps shut. Only works if either inward or outward is selected, not both.")]
-        [Range(0, 1)]
-        public float minSnapClose = 1;
-        [Tooltip("The amount of friction the door will have whilst swinging when it is not grabbed.")]
-        public float releasedFriction = 10f;
-        [Tooltip("The amount of friction the door will have whilst swinging when it is grabbed.")]
-        public float grabbedFriction = 100f;
-        [Tooltip("If this is checked then only the door handle is grabbale to operate the door.")]
-        public bool handleInteractableOnly = false;
+        [Tooltip("Keeps the door closed with a slight force. This way the door will not gradually open due to some minor physics effect. Only works if either inward or outward is selected, not both.")]
+        public bool snapping = true;
 
+        private static float DOOR_ANGULAR_DRAG = 10;
         private float stepSize = 1f;
-        private Rigidbody doorRigidbody;
-        private HingeJoint doorHinge;
-        private ConstantForce doorSnapForce;
-        private Rigidbody frameRigidbody;
+        private Rigidbody handleRb;
+        private FixedJoint handleFj;
+        private VRTK_InteractableObject handleIo;
+        private Rigidbody doorRb;
+        private HingeJoint doorHj;
+        private ConstantForce doorCf;
+        private Rigidbody frameRb;
         private Direction finalDirection;
         private float subDirection = 1; // positive or negative can be determined automatically since handles dictate that
         private Vector3 secondaryDirection;
-        private bool doorHingeCreated = false;
-        private bool doorSnapForceCreated = false;
+        private bool doorHjCreated = false;
+        private bool doorCfCreated = false;
 
         protected override void OnDrawGizmos()
         {
@@ -65,14 +62,14 @@ namespace VRTK
 
             // show opening direction
             Bounds handleBounds = new Bounds();
-            Bounds doorBounds = VRTK_SharedMethods.GetBounds(GetDoor().transform, GetDoor().transform);
-            float extensionLength = 0.5f;
+            Bounds doorBounds = VRTK_SharedMethods.GetBounds(getDoor().transform, getDoor().transform);
+            float length = 0.5f;
             if (handles)
             {
                 handleBounds = VRTK_SharedMethods.GetBounds(handles.transform, handles.transform);
             }
-            Vector3 firstDirection = Vector3.zero;
-            Vector3 secondDirection = Vector3.zero;
+            Vector3 dir = Vector3.zero;
+            Vector3 dir2 = Vector3.zero;
             Vector3 thirdDirection = getThirdDirection(Direction2Axis(finalDirection), secondaryDirection);
             bool invertGizmos = false;
 
@@ -81,64 +78,64 @@ namespace VRTK
                 case Direction.x:
                     if (thirdDirection == Vector3.up)
                     {
-                        firstDirection = transform.up.normalized;
-                        secondDirection = transform.forward.normalized;
-                        extensionLength *= doorBounds.extents.z;
+                        dir = transform.up.normalized;
+                        dir2 = transform.forward.normalized;
+                        length *= doorBounds.extents.z;
                     }
                     else
                     {
-                        firstDirection = transform.forward.normalized;
-                        secondDirection = transform.up.normalized;
-                        extensionLength *= doorBounds.extents.y;
+                        dir = transform.forward.normalized;
+                        dir2 = transform.up.normalized;
+                        length *= doorBounds.extents.y;
                         invertGizmos = true;
                     }
                     break;
                 case Direction.y:
                     if (thirdDirection == Vector3.right)
                     {
-                        firstDirection = transform.right.normalized;
-                        secondDirection = transform.forward.normalized;
-                        extensionLength *= doorBounds.extents.z;
+                        dir = transform.right.normalized;
+                        dir2 = transform.forward.normalized;
+                        length *= doorBounds.extents.z;
                         invertGizmos = true;
                     }
                     else
                     {
-                        firstDirection = transform.forward.normalized;
-                        secondDirection = transform.right.normalized;
-                        extensionLength *= doorBounds.extents.x;
+                        dir = transform.forward.normalized;
+                        dir2 = transform.right.normalized;
+                        length *= doorBounds.extents.x;
                     }
                     break;
                 case Direction.z:
                     if (thirdDirection == Vector3.up)
                     {
-                        firstDirection = transform.up.normalized;
-                        secondDirection = transform.right.normalized;
-                        extensionLength *= doorBounds.extents.x;
+                        dir = transform.up.normalized;
+                        dir2 = transform.right.normalized;
+                        length *= doorBounds.extents.x;
                         invertGizmos = true;
                     }
                     else
                     {
-                        firstDirection = transform.right.normalized;
-                        secondDirection = transform.up.normalized;
-                        extensionLength *= doorBounds.extents.y;
+                        dir = transform.right.normalized;
+                        dir2 = transform.up.normalized;
+                        length *= doorBounds.extents.y;
                     }
                     break;
             }
 
             if ((!invertGizmos && openInward) || (invertGizmos && openOutward))
             {
-                Vector3 point1Start = (handles) ? handleBounds.center : doorBounds.center;
-                Vector3 point1End = point1Start + secondDirection * extensionLength * subDirection - firstDirection * (extensionLength / 2f) * subDirection;
-                Gizmos.DrawLine(point1Start, point1End);
-                Gizmos.DrawSphere(point1End, extensionLength / 8f);
+                Vector3 p1 = (handles) ? handleBounds.center : doorBounds.center;
+                Vector3 p1end = p1 + dir2 * length * subDirection - dir * (length / 2f) * subDirection;
+                Gizmos.DrawLine(p1, p1end);
+                Gizmos.DrawSphere(p1end, length / 8f);
             }
 
             if ((!invertGizmos && openOutward) || (invertGizmos && openInward))
             {
-                Vector3 point2Start = (handles) ? handleBounds.center : doorBounds.center;
-                Vector3 point2End = point2Start + secondDirection * extensionLength * subDirection + firstDirection * (extensionLength / 2f) * subDirection;
-                Gizmos.DrawLine(point2Start, point2End);
-                Gizmos.DrawSphere(point2End, extensionLength / 8f);
+                Vector3 p2 = (handles) ? handleBounds.center : doorBounds.center;
+                Vector3 p2end = p2 + dir2 * length * subDirection + dir * (length / 2f) * subDirection;
+                Gizmos.DrawLine(p2, p2end);
+                Gizmos.DrawSphere(p2end, length / 8f);
             }
         }
 
@@ -154,8 +151,8 @@ namespace VRTK
         protected override bool DetectSetup()
         {
             // detect axis
-            doorHinge = GetDoor().GetComponent<HingeJoint>();
-            if (doorHinge && !doorHingeCreated)
+            doorHj = getDoor().GetComponent<HingeJoint>();
+            if (doorHj && !doorHjCreated)
             {
                 direction = Direction.autodetect;
             }
@@ -164,15 +161,15 @@ namespace VRTK
             {
                 return false;
             }
-            if (doorHinge && !doorHingeCreated)
+            if (doorHj && !doorHjCreated)
             {
                 // if there is a hinge joint already it overrides axis selection
                 direction = finalDirection;
             }
 
             // detect opening direction
-            Bounds doorBounds = VRTK_SharedMethods.GetBounds(GetDoor().transform, transform);
-            if (doorHinge == null || doorHingeCreated)
+            Bounds doorBounds = VRTK_SharedMethods.GetBounds(getDoor().transform, transform);
+            if (doorHj == null || doorHjCreated)
             {
                 if (handles)
                 {
@@ -239,57 +236,57 @@ namespace VRTK
             else
             {
                 // calculate directions from existing anchor
-                Vector3 existingAnchorDirection = doorBounds.center - doorHinge.connectedAnchor;
-                if (existingAnchorDirection.x != 0)
+                Vector3 dir = doorBounds.center - doorHj.connectedAnchor;
+                if (dir.x != 0)
                 {
                     secondaryDirection = Vector3.right;
-                    subDirection = existingAnchorDirection.x <= 0 ? 1 : -1;
+                    subDirection = dir.x <= 0 ? 1 : -1;
                 }
-                else if (existingAnchorDirection.y != 0)
+                else if (dir.y != 0)
                 {
                     secondaryDirection = Vector3.up;
-                    subDirection = existingAnchorDirection.y <= 0 ? 1 : -1;
+                    subDirection = dir.y <= 0 ? 1 : -1;
                 }
-                else if (existingAnchorDirection.z != 0)
+                else if (dir.z != 0)
                 {
                     secondaryDirection = Vector3.forward;
-                    subDirection = existingAnchorDirection.z <= 0 ? 1 : -1;
+                    subDirection = dir.z <= 0 ? 1 : -1;
                 }
             }
 
-            if (doorHingeCreated)
+            if (doorHjCreated)
             {
                 float extents = 0;
                 if (secondaryDirection == Vector3.right)
                 {
-                    extents = doorBounds.extents.x / GetDoor().transform.lossyScale.x;
+                    extents = doorBounds.extents.x / getDoor().transform.lossyScale.x;
                 }
                 else if (secondaryDirection == Vector3.up)
                 {
-                    extents = doorBounds.extents.y / GetDoor().transform.lossyScale.y;
+                    extents = doorBounds.extents.y / getDoor().transform.lossyScale.y;
                 }
                 else
                 {
-                    extents = doorBounds.extents.z / GetDoor().transform.lossyScale.z;
+                    extents = doorBounds.extents.z / getDoor().transform.lossyScale.z;
                 }
 
-                doorHinge.anchor = secondaryDirection * subDirection * extents;
-                doorHinge.axis = Direction2Axis(finalDirection);
+                doorHj.anchor = secondaryDirection * subDirection * extents;
+                doorHj.axis = Direction2Axis(finalDirection);
             }
-            if (doorHinge)
+            if (doorHj)
             {
-                doorHinge.useLimits = true;
-                doorHinge.enableCollision = true;
+                doorHj.useLimits = true;
+                doorHj.enableCollision = true;
 
-                JointLimits limits = doorHinge.limits;
+                JointLimits limits = doorHj.limits;
                 limits.min = openInward ? -maxAngle : 0;
                 limits.max = openOutward ? maxAngle : 0;
                 limits.bounciness = 0;
-                doorHinge.limits = limits;
+                doorHj.limits = limits;
             }
-            if (doorSnapForceCreated)
+            if (doorCfCreated)
             {
-                doorSnapForce.force = getThirdDirection(doorHinge.axis, secondaryDirection) * (subDirection * -5f);
+                doorCf.relativeForce = getThirdDirection(doorHj.axis, secondaryDirection) * subDirection * -50f;
             }
 
             return true;
@@ -297,57 +294,53 @@ namespace VRTK
 
         protected override ControlValueRange RegisterValueRange()
         {
-            return new ControlValueRange()
-            {
-                controlMin = doorHinge.limits.min,
-                controlMax = doorHinge.limits.max
-            };
+            return new ControlValueRange() { controlMin = doorHj.limits.min, controlMax = doorHj.limits.max };
         }
 
         protected override void HandleUpdate()
         {
             value = CalculateValue();
-            doorSnapForce.enabled = (openOutward ^ openInward) && Mathf.Abs(value) < (minSnapClose * 100f); // snapping only works for single direction doors so far
+            doorCf.enabled = snapping && (openOutward ^ openInward) && Mathf.Abs(value) < 2f; // snapping only works for single direction doors so far
         }
 
-        private Vector3 Direction2Axis(Direction givenDirection)
+        private Vector3 Direction2Axis(Direction direction)
         {
-            Vector3 returnAxis = Vector3.zero;
+            Vector3 axis = Vector3.zero;
 
-            switch (givenDirection)
+            switch (direction)
             {
                 case Direction.x:
-                    returnAxis = new Vector3(1, 0, 0);
+                    axis = new Vector3(1, 0, 0);
                     break;
                 case Direction.y:
-                    returnAxis = new Vector3(0, 1, 0);
+                    axis = new Vector3(0, 1, 0);
                     break;
                 case Direction.z:
-                    returnAxis = new Vector3(0, 0, 1);
+                    axis = new Vector3(0, 0, 1);
                     break;
             }
 
-            return returnAxis;
+            return axis;
         }
 
         private Direction DetectDirection()
         {
-            Direction returnDirection = Direction.autodetect;
+            Direction direction = Direction.autodetect;
 
-            if (doorHinge && !doorHingeCreated)
+            if (doorHj && !doorHjCreated)
             {
                 // use direction of hinge joint
-                if (doorHinge.axis == Vector3.right)
+                if (doorHj.axis == Vector3.right)
                 {
-                    returnDirection = Direction.x;
+                    direction = Direction.x;
                 }
-                else if (doorHinge.axis == Vector3.up)
+                else if (doorHj.axis == Vector3.up)
                 {
-                    returnDirection = Direction.y;
+                    direction = Direction.y;
                 }
-                else if (doorHinge.axis == Vector3.forward)
+                else if (doorHj.axis == Vector3.forward)
                 {
-                    returnDirection = Direction.z;
+                    direction = Direction.z;
                 }
             }
             else
@@ -355,21 +348,21 @@ namespace VRTK
                 if (handles)
                 {
                     Bounds handleBounds = VRTK_SharedMethods.GetBounds(handles.transform, transform);
-                    Bounds doorBounds = VRTK_SharedMethods.GetBounds(GetDoor().transform, transform, handles.transform);
+                    Bounds doorBounds = VRTK_SharedMethods.GetBounds(getDoor().transform, transform, handles.transform);
 
                     // handles determine direction, there are actually two directions possible depending on handle position, we'll just detect one of them for now, preference is y
                     if ((handleBounds.center.y + handleBounds.extents.y) > (doorBounds.center.y + doorBounds.extents.y) || (handleBounds.center.y - handleBounds.extents.y) < (doorBounds.center.y - doorBounds.extents.y))
                     {
-                        returnDirection = Direction.x;
+                        direction = Direction.x;
                     }
                     else
                     {
-                        returnDirection = Direction.y;
+                        direction = Direction.y;
                     }
                 }
             }
 
-            return returnDirection;
+            return direction;
         }
 
         private void InitFrame()
@@ -379,48 +372,42 @@ namespace VRTK
                 return;
             }
 
-            frameRigidbody = frame.GetComponent<Rigidbody>();
-            if (frameRigidbody == null)
+            frameRb = frame.GetComponent<Rigidbody>();
+            if (frameRb == null)
             {
-                frameRigidbody = frame.AddComponent<Rigidbody>();
-                frameRigidbody.isKinematic = true; // otherwise frame moves/falls over when door is moved or fully open
-                frameRigidbody.angularDrag = releasedFriction; // in case this is a nested door
+                frameRb = frame.AddComponent<Rigidbody>();
+                frameRb.isKinematic = true; // otherwise frame moves/falls over when door is moved or fully open
+                frameRb.angularDrag = DOOR_ANGULAR_DRAG; // in case this is a nested door
             }
         }
 
         private void InitDoor()
         {
-            GameObject actualDoor = GetDoor();
-            VRTK_SharedMethods.CreateColliders(actualDoor);
+            VRTK_SharedMethods.CreateColliders(getDoor());
 
-            doorRigidbody = actualDoor.GetComponent<Rigidbody>();
-            if (doorRigidbody == null)
+            doorRb = getDoor().GetComponent<Rigidbody>();
+            if (doorRb == null)
             {
-                doorRigidbody = actualDoor.AddComponent<Rigidbody>();
-                doorRigidbody.angularDrag = releasedFriction;
+                doorRb = getDoor().AddComponent<Rigidbody>();
+                doorRb.angularDrag = DOOR_ANGULAR_DRAG;
             }
-            doorRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic; // otherwise door will not react to fast moving controller
-            doorRigidbody.isKinematic = false; // in case nested door as already created this
+            doorRb.collisionDetectionMode = CollisionDetectionMode.Continuous; // otherwise door will not react to fast moving controller
+            doorRb.isKinematic = false; // in case nested door as already created this
 
-            doorHinge = actualDoor.GetComponent<HingeJoint>();
-            if (doorHinge == null)
+            doorHj = getDoor().GetComponent<HingeJoint>();
+            if (doorHj == null)
             {
-                doorHinge = actualDoor.AddComponent<HingeJoint>();
-                doorHingeCreated = true;
+                doorHj = getDoor().AddComponent<HingeJoint>();
+                doorHjCreated = true;
             }
-            doorHinge.connectedBody = frameRigidbody;
+            doorHj.connectedBody = frameRb;
 
-            doorSnapForce = actualDoor.GetComponent<ConstantForce>();
-            if (doorSnapForce == null)
+            doorCf = getDoor().GetComponent<ConstantForce>();
+            if (doorCf == null)
             {
-                doorSnapForce = actualDoor.AddComponent<ConstantForce>();
-                doorSnapForce.enabled = false;
-                doorSnapForceCreated = true;
-            }
-
-            if (!handleInteractableOnly)
-            {
-                CreateInteractableObject(actualDoor);
+                doorCf = getDoor().AddComponent<ConstantForce>();
+                doorCf.enabled = false;
+                doorCfCreated = true;
             }
         }
 
@@ -436,62 +423,41 @@ namespace VRTK
                 VRTK_SharedMethods.CreateColliders(handles);
             }
 
-            Rigidbody handleRigidbody = handles.GetComponent<Rigidbody>();
-            if (handleRigidbody == null)
+            handleRb = handles.GetComponent<Rigidbody>();
+            if (handleRb == null)
             {
-                handleRigidbody = handles.AddComponent<Rigidbody>();
+                handleRb = handles.AddComponent<Rigidbody>();
             }
-            handleRigidbody.isKinematic = false;
-            handleRigidbody.useGravity = false;
+            handleRb.isKinematic = false;
+            handleRb.useGravity = false;
 
-            FixedJoint handleFixedJoint = handles.GetComponent<FixedJoint>();
-            if (handleFixedJoint == null)
+            handleFj = handles.GetComponent<FixedJoint>();
+            if (handleFj == null)
             {
-                handleFixedJoint = handles.AddComponent<FixedJoint>();
-                handleFixedJoint.connectedBody = doorRigidbody;
+                handleFj = handles.AddComponent<FixedJoint>();
+                handleFj.connectedBody = doorRb;
             }
 
-            if (handleInteractableOnly)
+            handleIo = handles.GetComponent<VRTK_InteractableObject>();
+            if (handleIo == null)
             {
-                CreateInteractableObject(handles);
+                handleIo = handles.AddComponent<VRTK_InteractableObject>();
             }
-        }
-
-        private void CreateInteractableObject(GameObject target)
-        {
-            VRTK_InteractableObject targetInteractableObject = target.GetComponent<VRTK_InteractableObject>();
-            if (targetInteractableObject == null)
-            {
-                targetInteractableObject = target.AddComponent<VRTK_InteractableObject>();
-            }
-            targetInteractableObject.isGrabbable = true;
-            targetInteractableObject.grabAttachMechanicScript = target.AddComponent<GrabAttachMechanics.VRTK_RotatorTrackGrabAttach>();
-            targetInteractableObject.grabAttachMechanicScript.precisionGrab = true;
-            targetInteractableObject.secondaryGrabActionScript = target.AddComponent<SecondaryControllerGrabActions.VRTK_SwapControllerGrabAction>();
-            targetInteractableObject.stayGrabbedOnTeleport = false;
-
-            targetInteractableObject.InteractableObjectGrabbed += InteractableObjectGrabbed;
-            targetInteractableObject.InteractableObjectUngrabbed += InteractableObjectUngrabbed;
-        }
-
-        private void InteractableObjectGrabbed(object sender, InteractableObjectEventArgs e)
-        {
-            doorRigidbody.angularDrag = grabbedFriction;
-        }
-
-        private void InteractableObjectUngrabbed(object sender, InteractableObjectEventArgs e)
-        {
-            doorRigidbody.angularDrag = releasedFriction;
+            handleIo.isGrabbable = true;
+            handleIo.grabAttachMechanicScript = gameObject.AddComponent<GrabAttachMechanics.VRTK_TrackObjectGrabAttach>();
+            handleIo.grabAttachMechanicScript.precisionGrab = true;
+            handleIo.secondaryGrabActionScript = gameObject.AddComponent<SecondaryControllerGrabActions.VRTK_SwapControllerGrabAction>();
+            handleIo.stayGrabbedOnTeleport = false;
         }
 
         private float CalculateValue()
         {
-            return Mathf.Round((doorHinge.angle) / stepSize) * stepSize;
+            return Mathf.Round((doorHj.angle) / stepSize) * stepSize;
         }
 
-        private GameObject GetDoor()
+        private GameObject getDoor()
         {
-            return (door ? door : gameObject);
+            return (door) ? door : gameObject;
         }
     }
 }

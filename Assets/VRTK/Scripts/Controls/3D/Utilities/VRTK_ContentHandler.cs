@@ -21,37 +21,37 @@ namespace VRTK
         [Tooltip("Any transform that will act as the parent while the object is not inside the control.")]
         public Transform outside;
 
-        protected virtual void Start()
+        private void Start()
         {
-            VRTK_InteractableObject contentInteractableObject = GetComponent<VRTK_InteractableObject>();
-            if (contentInteractableObject == null)
+            VRTK_InteractableObject io = GetComponent<VRTK_InteractableObject>();
+            if (io == null)
             {
                 // treat as parent and assign to all children
-                foreach (var childIo in GetComponentsInChildren<VRTK_InteractableObject>())
+                foreach (VRTK_InteractableObject childIo in GetComponentsInChildren<VRTK_InteractableObject>())
                 {
                     if (childIo.GetComponent<VRTK_ContentHandler>() == null)
                     {
-                        VRTK_ContentHandler childContentHandler = childIo.gameObject.AddComponent<VRTK_ContentHandler>();
-                        childContentHandler.control = control;
-                        childContentHandler.inside = inside;
-                        childContentHandler.outside = outside;
+                        VRTK_ContentHandler ch = childIo.gameObject.AddComponent<VRTK_ContentHandler>();
+                        ch.control = control;
+                        ch.inside = inside;
+                        ch.outside = outside;
                     }
                 }
             }
         }
 
-        protected virtual void OnCollisionEnter(Collision collision)
+        private void OnCollisionEnter(Collision collision)
         {
             Bounds insideBounds = VRTK_SharedMethods.GetBounds(inside, null, control.GetContent().transform);
             Bounds objBounds = VRTK_SharedMethods.GetBounds(transform);
 
             if (objBounds.Intersects(insideBounds))
             {
-                transform.SetParent(control.GetContent().transform);
+                transform.parent = control.GetContent().transform;
             }
             else
             {
-                transform.SetParent(outside);
+                transform.parent = outside;
             }
         }
     }

@@ -118,7 +118,7 @@ namespace VRTK
         {
             base.OnEnable();
 
-            pointerOriginTransform = (pointerOriginTransform == null ? VRTK_SDK_Bridge.GenerateControllerPointerOrigin(gameObject) : pointerOriginTransform);
+            pointerOriginTransform = (pointerOriginTransform == null ? VRTK_SDK_Bridge.GenerateControllerPointerOrigin() : pointerOriginTransform);
 
             AttemptSetController();
 
@@ -145,7 +145,12 @@ namespace VRTK
             pointerContactTarget = null;
             destinationPosition = Vector3.zero;
 
-            AliasRegistration(false);
+            if (controller)
+            {
+                controller.AliasPointerOn -= new ControllerInteractionEventHandler(EnablePointerBeam);
+                controller.AliasPointerOff -= new ControllerInteractionEventHandler(DisablePointerBeam);
+                controller.AliasPointerSet -= new ControllerInteractionEventHandler(SetPointerDestination);
+            }
             controllerGrabScript = null;
         }
 
@@ -159,25 +164,6 @@ namespace VRTK
             if (interactWithObjects && objectInteractor && objectInteractor.activeInHierarchy)
             {
                 UpdateObjectInteractor();
-            }
-        }
-
-        protected virtual void AliasRegistration(bool state)
-        {
-            if (controller)
-            {
-                if (state)
-                {
-                    controller.AliasPointerOn += new ControllerInteractionEventHandler(EnablePointerBeam);
-                    controller.AliasPointerOff += new ControllerInteractionEventHandler(DisablePointerBeam);
-                    controller.AliasPointerSet += new ControllerInteractionEventHandler(SetPointerDestination);
-                }
-                else
-                {
-                    controller.AliasPointerOn -= new ControllerInteractionEventHandler(EnablePointerBeam);
-                    controller.AliasPointerOff -= new ControllerInteractionEventHandler(DisablePointerBeam);
-                    controller.AliasPointerSet -= new ControllerInteractionEventHandler(SetPointerDestination);
-                }
             }
         }
 
@@ -462,7 +448,9 @@ namespace VRTK
         {
             if (controller)
             {
-                AliasRegistration(true);
+                controller.AliasPointerOn += new ControllerInteractionEventHandler(EnablePointerBeam);
+                controller.AliasPointerOff += new ControllerInteractionEventHandler(DisablePointerBeam);
+                controller.AliasPointerSet += new ControllerInteractionEventHandler(SetPointerDestination);
 
                 controllerGrabScript = controller.GetComponent<VRTK_InteractGrab>();
 
@@ -489,7 +477,7 @@ namespace VRTK
             interactableObject = target.GetComponent<VRTK_InteractableObject>();
             bool cannotUseBecauseNotGrabbed = (interactableObject && interactableObject.useOnlyIfGrabbed && !interactableObject.IsGrabbed());
 
-            if (PointerActivatesUseAction(interactableObject) && interactableObject.holdButtonToUse && !cannotUseBecauseNotGrabbed && interactableObject.usingState == 0)
+            if (PointerActivatesUseAction(interactableObject) && interactableObject.holdButtonToUse && !cannotUseBecauseNotGrabbed)
             {
                 interactableObject.StartUsing(controller.gameObject);
                 interactableObject.usingState++;

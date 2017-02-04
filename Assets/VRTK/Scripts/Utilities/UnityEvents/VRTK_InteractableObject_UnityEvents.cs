@@ -14,27 +14,27 @@
         /// <summary>
         /// Emits the InteractableObjectTouched class event.
         /// </summary>
-        public UnityObjectEvent OnTouch = new UnityObjectEvent();
+        public UnityObjectEvent OnTouch;
         /// <summary>
         /// Emits the InteractableObjectUntouched class event.
         /// </summary>
-        public UnityObjectEvent OnUntouch = new UnityObjectEvent();
+        public UnityObjectEvent OnUntouch;
         /// <summary>
         /// Emits the InteractableObjectGrabbed class event.
         /// </summary>
-        public UnityObjectEvent OnGrab = new UnityObjectEvent();
+        public UnityObjectEvent OnGrab;
         /// <summary>
         /// Emits the InteractableObjectUngrabbed class event.
         /// </summary>
-        public UnityObjectEvent OnUngrab = new UnityObjectEvent();
+        public UnityObjectEvent OnUngrab;
         /// <summary>
         /// Emits the InteractableObjectUsed class event.
         /// </summary>
-        public UnityObjectEvent OnUse = new UnityObjectEvent();
+        public UnityObjectEvent OnUse;
         /// <summary>
         /// Emits the InteractableObjectUnused class event.
         /// </summary>
-        public UnityObjectEvent OnUnuse = new UnityObjectEvent();
+        public UnityObjectEvent OnUnuse;
 
         private void SetInteractableObject()
         {

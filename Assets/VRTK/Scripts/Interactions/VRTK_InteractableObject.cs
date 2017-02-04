@@ -362,7 +362,6 @@ namespace VRTK
         {
             OnInteractableObjectUnused(SetInteractableObjectEvent(previousUsingObject));
             ResetUsingObject();
-            usingState = 0;
             usingObject = null;
         }
 
@@ -402,7 +401,7 @@ namespace VRTK
         /// The PauseCollisions method temporarily pauses all collisions on the object at grab time by removing the object's rigidbody's ability to detect collisions. This can be useful for preventing clipping when initially grabbing an item.
         /// </summary>
         /// <param name="delay">The amount of time to pause the collisions for.</param>
-        public virtual void PauseCollisions(float delay)
+        public void PauseCollisions(float delay)
         {
             if (delay > 0f)
             {
@@ -417,7 +416,7 @@ namespace VRTK
         /// <summary>
         /// The ZeroVelocity method resets the velocity and angular velocity to zero on the rigidbody attached to the object.
         /// </summary>
-        public virtual void ZeroVelocity()
+        public void ZeroVelocity()
         {
             if (interactableRigidbody)
             {
@@ -429,7 +428,7 @@ namespace VRTK
         /// <summary>
         /// The SaveCurrentState method stores the existing object parent and the object's rigidbody kinematic setting.
         /// </summary>
-        public virtual void SaveCurrentState()
+        public void SaveCurrentState()
         {
             if (!IsGrabbed() && !snappedInSnapDropZone)
             {
@@ -484,7 +483,7 @@ namespace VRTK
         /// <param name="actualController">The game object of the controller that is being checked.</param>
         /// <param name="controllerCheck">The value of which controller is allowed to interact with this object.</param>
         /// <returns>Is true if the interacting controller is allowed to grab the object.</returns>
-        public virtual bool IsValidInteractableController(GameObject actualController, AllowedController controllerCheck)
+        public bool IsValidInteractableController(GameObject actualController, AllowedController controllerCheck)
         {
             if (controllerCheck == AllowedController.Both)
             {
@@ -498,7 +497,7 @@ namespace VRTK
         /// <summary>
         /// The ForceStopInteracting method forces the object to no longer be interacted with and will cause a controller to drop the object and stop touching it. This is useful if the controller is required to auto interact with another object.
         /// </summary>
-        public virtual void ForceStopInteracting()
+        public void ForceStopInteracting()
         {
             if (gameObject.activeInHierarchy)
             {
@@ -516,7 +515,7 @@ namespace VRTK
         /// <summary>
         /// The ForceStopSecondaryGrabInteraction method forces the object to no longer be influenced by the second controller grabbing it.
         /// </summary>
-        public virtual void ForceStopSecondaryGrabInteraction()
+        public void ForceStopSecondaryGrabInteraction()
         {
             var grabbingObject = GetSecondaryGrabbingObject();
             if (grabbingObject)
@@ -548,7 +547,7 @@ namespace VRTK
         /// <summary>
         /// the StoreLocalScale method saves the current transform local scale values.
         /// </summary>
-        public virtual void StoreLocalScale()
+        public void StoreLocalScale()
         {
             previousLocalScale = transform.localScale;
         }
@@ -558,7 +557,7 @@ namespace VRTK
         /// </summary>
         /// <param name="snapDropZone">The Snap Drop Zone object that is being interacted with.</param>
         /// <param name="state">The state of whether the interactable object is fixed in or removed from the Snap Drop Zone. True denotes the interactable object is fixed to the Snap Drop Zone and false denotes it has been removed from the Snap Drop Zone.</param>
-        public virtual void ToggleSnapDropZone(VRTK_SnapDropZone snapDropZone, bool state)
+        public void ToggleSnapDropZone(VRTK_SnapDropZone snapDropZone, bool state)
         {
             snappedInSnapDropZone = state;
             if (state)

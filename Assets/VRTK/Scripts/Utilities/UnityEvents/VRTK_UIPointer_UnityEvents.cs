@@ -14,23 +14,23 @@
         /// <summary>
         /// Emits the UIPointerElementEnter class event.
         /// </summary>
-        public UnityObjectEvent OnUIPointerElementEnter = new UnityObjectEvent();
+        public UnityObjectEvent OnUIPointerElementEnter;
         /// <summary>
         /// Emits the UIPointerElementExit class event.
         /// </summary>
-        public UnityObjectEvent OnUIPointerElementExit = new UnityObjectEvent();
+        public UnityObjectEvent OnUIPointerElementExit;
         /// <summary>
         /// Emits the UIPointerElementClick class event.
         /// </summary>
-        public UnityObjectEvent OnUIPointerElementClick = new UnityObjectEvent();
+        public UnityObjectEvent OnUIPointerElementClick;
         /// <summary>
         /// Emits the UIPointerElementDragStart class event.
         /// </summary>
-        public UnityObjectEvent OnUIPointerElementDragStart = new UnityObjectEvent();
+        public UnityObjectEvent OnUIPointerElementDragStart;
         /// <summary>
         /// Emits the UIPointerElementDragEnd class event.
         /// </summary>
-        public UnityObjectEvent OnUIPointerElementDragEnd = new UnityObjectEvent();
+        public UnityObjectEvent OnUIPointerElementDragEnd;
 
         private void SetUIPointer()
         {

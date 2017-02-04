@@ -14,11 +14,11 @@
         /// <summary>
         /// Emits the WillDashThruObjects class event.
         /// </summary>
-        public UnityObjectEvent OnWillDashThruObjects = new UnityObjectEvent();
+        public UnityObjectEvent OnWillDashThruObjects;
         /// <summary>
         /// Emits the DashedThruObjects class event.
         /// </summary>
-        public UnityObjectEvent OnDashedThruObjects = new UnityObjectEvent();
+        public UnityObjectEvent OnDashedThruObjects;
 
         private void SetDashTeleport()
         {

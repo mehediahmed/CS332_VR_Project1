@@ -17,7 +17,7 @@ namespace VRTK
     {
         private VRTK_UIDraggableItem droppableItem;
 
-        public virtual void OnPointerEnter(PointerEventData eventData)
+        public void OnPointerEnter(PointerEventData eventData)
         {
             if (eventData.pointerDrag)
             {
@@ -30,7 +30,7 @@ namespace VRTK
             }
         }
 
-        public virtual void OnPointerExit(PointerEventData eventData)
+        public void OnPointerExit(PointerEventData eventData)
         {
             if (droppableItem)
             {

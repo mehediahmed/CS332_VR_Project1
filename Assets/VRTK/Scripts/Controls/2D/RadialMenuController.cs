@@ -12,7 +12,7 @@ namespace VRTK
         private float currentAngle; //Keep track of angle for when we click
         private bool touchpadTouched;
 
-        protected virtual void Awake()
+        private void Awake()
         {
             menu = GetComponent<RadialMenu>();
 

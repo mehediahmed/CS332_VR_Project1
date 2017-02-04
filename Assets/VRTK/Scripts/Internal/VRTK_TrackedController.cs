@@ -55,7 +55,7 @@
             return e;
         }
 
-        protected virtual void OnEnable()
+        private void OnEnable()
         {
             aliasController = VRTK_DeviceFinder.GetScriptAliasController(gameObject);
 
@@ -66,37 +66,9 @@
             enableControllerCoroutine = StartCoroutine(Enable());
         }
 
-        protected virtual void OnDisable()
+        private void OnDisable()
         {
             Invoke("Disable", 0f);
-        }
-
-        protected virtual void Disable()
-        {
-            if (enableControllerCoroutine != null)
-            {
-                StopCoroutine(enableControllerCoroutine);
-            }
-
-            OnControllerDisabled(SetEventPayload());
-        }
-
-        protected virtual void Update()
-        {
-            var checkIndex = VRTK_DeviceFinder.GetControllerIndex(gameObject);
-            if (currentIndex < uint.MaxValue && checkIndex != currentIndex)
-            {
-                var previousIndex = currentIndex;
-                currentIndex = checkIndex;
-                OnControllerIndexChanged(SetEventPayload(previousIndex));
-            }
-
-            VRTK_SDK_Bridge.ControllerProcessUpdate(currentIndex);
-
-            if (aliasController && gameObject.activeInHierarchy && !aliasController.activeSelf)
-            {
-                aliasController.SetActive(true);
-            }
         }
 
         private IEnumerator Enable()
@@ -110,6 +82,32 @@
 
             currentIndex = VRTK_DeviceFinder.GetControllerIndex(gameObject);
             OnControllerEnabled(SetEventPayload());
+        }
+
+        private void Disable()
+        {
+            if (enableControllerCoroutine != null)
+            {
+                StopCoroutine(enableControllerCoroutine);
+            }
+
+            OnControllerDisabled(SetEventPayload());
+        }
+
+        private void Update()
+        {
+            var checkIndex = VRTK_DeviceFinder.GetControllerIndex(gameObject);
+            if (currentIndex < uint.MaxValue && checkIndex != currentIndex)
+            {
+                var previousIndex = currentIndex;
+                currentIndex = checkIndex;
+                OnControllerIndexChanged(SetEventPayload(previousIndex));
+            }
+
+            if (aliasController && gameObject.activeInHierarchy && !aliasController.activeSelf)
+            {
+                aliasController.SetActive(true);
+            }
         }
     }
 }

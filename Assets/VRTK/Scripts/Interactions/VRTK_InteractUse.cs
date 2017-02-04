@@ -84,20 +84,20 @@ namespace VRTK
             }
         }
 
-        protected virtual void Awake()
+        private void Awake()
         {
             interactTouch = GetComponent<VRTK_InteractTouch>();
             controllerActions = GetComponent<VRTK_ControllerActions>();
             controllerEvents = GetComponent<VRTK_ControllerEvents>();
         }
 
-        protected virtual void OnEnable()
+        private void OnEnable()
         {
             controllerEvents.AliasUseOn += new ControllerInteractionEventHandler(DoStartUseObject);
             controllerEvents.AliasUseOff += new ControllerInteractionEventHandler(DoStopUseObject);
         }
 
-        protected virtual void OnDisable()
+        private void OnDisable()
         {
             ForceStopUsing();
             controllerEvents.AliasUseOn -= new ControllerInteractionEventHandler(DoStartUseObject);
@@ -144,16 +144,13 @@ namespace VRTK
             }
         }
 
-		private void AttemptHaptics()
-		{
-			if (usingObject) 
-			{ 
-				var doHaptics = usingObject.GetComponentInParent<VRTK_InteractHaptics>();
-				if (doHaptics)
-				{
-					doHaptics.HapticsOnUse(controllerActions);
-				}
-			}
+        private void AttemptHaptics()
+        {
+            var doHaptics = usingObject.GetComponentInParent<VRTK_InteractHaptics>();
+            if (doHaptics)
+            {
+                doHaptics.HapticsOnUse(controllerActions);
+            }
         }
 
         private void ToggleControllerVisibility(bool visible)

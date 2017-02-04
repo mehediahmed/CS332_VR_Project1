@@ -14,11 +14,11 @@
         /// <summary>
         /// Emits the ControllerModelVisible class event.
         /// </summary>
-        public UnityObjectEvent OnControllerModelVisible = new UnityObjectEvent();
+        public UnityObjectEvent OnControllerModelVisible;
         /// <summary>
         /// Emits the ControllerModelInvisible class event.
         /// </summary>
-        public UnityObjectEvent OnControllerModelInvisible = new UnityObjectEvent();
+        public UnityObjectEvent OnControllerModelInvisible;
 
         private void SetControllerAction()
         {

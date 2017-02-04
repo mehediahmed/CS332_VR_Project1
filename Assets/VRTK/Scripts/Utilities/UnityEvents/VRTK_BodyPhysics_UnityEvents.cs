@@ -14,27 +14,27 @@
         /// <summary>
         /// Emits the StartFalling class event.
         /// </summary>
-        public UnityObjectEvent OnStartFalling = new UnityObjectEvent();
+        public UnityObjectEvent OnStartFalling;
         /// <summary>
         /// Emits the StopFalling class event.
         /// </summary>
-        public UnityObjectEvent OnStopFalling = new UnityObjectEvent();
+        public UnityObjectEvent OnStopFalling;
         /// <summary>
         /// Emits the StartMoving class event.
         /// </summary>
-        public UnityObjectEvent OnStartMoving = new UnityObjectEvent();
+        public UnityObjectEvent OnStartMoving;
         /// <summary>
         /// Emits the StopMoving class event.
         /// </summary>
-        public UnityObjectEvent OnStopMoving = new UnityObjectEvent();
+        public UnityObjectEvent OnStopMoving;
         /// <summary>
         /// Emits the StartColliding class event.
         /// </summary>
-        public UnityObjectEvent OnStartColliding = new UnityObjectEvent();
+        public UnityObjectEvent OnStartColliding;
         /// <summary>
         /// Emits the StopColliding class event.
         /// </summary>
-        public UnityObjectEvent OnStopColliding = new UnityObjectEvent();
+        public UnityObjectEvent OnStopColliding;
 
         private void SetBodyPhysics()
         {

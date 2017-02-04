@@ -23,7 +23,7 @@ namespace VRTK
 
         private Transform playerHead;
 
-        protected virtual void Awake()
+        private void Awake()
         {
             if (headOverride != null)
             {
@@ -35,7 +35,7 @@ namespace VRTK
             }
         }
 
-        protected virtual void Update()
+        private void Update()
         {
             if (playerHead == null)
             {

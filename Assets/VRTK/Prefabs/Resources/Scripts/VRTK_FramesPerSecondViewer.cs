@@ -39,7 +39,7 @@ namespace VRTK
         private float framesTime;
         private Text text;
 
-        protected virtual void Start()
+        private void Start()
         {
             transform.parent.GetComponent<Canvas>().planeDistance = 0.5f;
             text = GetComponent<Text>();
@@ -47,7 +47,7 @@ namespace VRTK
             text.transform.localPosition = position;
         }
 
-        protected virtual void Update()
+        private void Update()
         {
             framesCount++;
             framesTime += Time.unscaledDeltaTime;

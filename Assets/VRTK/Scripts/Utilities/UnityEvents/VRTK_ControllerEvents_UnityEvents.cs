@@ -14,197 +14,188 @@
         /// <summary>
         /// Emits the TriggerPressed class event.
         /// </summary>
-        public UnityObjectEvent OnTriggerPressed = new UnityObjectEvent();
+        public UnityObjectEvent OnTriggerPressed;
         /// <summary>
         /// Emits the TriggerReleased class event.
         /// </summary>
-        public UnityObjectEvent OnTriggerReleased = new UnityObjectEvent();
+        public UnityObjectEvent OnTriggerReleased;
         /// <summary>
         /// Emits the TriggerTouchStart class event.
         /// </summary>
-        public UnityObjectEvent OnTriggerTouchStart = new UnityObjectEvent();
+        public UnityObjectEvent OnTriggerTouchStart;
         /// <summary>
         /// Emits the TriggerTouchEnd class event.
         /// </summary>
-        public UnityObjectEvent OnTriggerTouchEnd = new UnityObjectEvent();
+        public UnityObjectEvent OnTriggerTouchEnd;
         /// <summary>
         /// Emits the TriggerHairlineStart class event.
         /// </summary>
-        public UnityObjectEvent OnTriggerHairlineStart = new UnityObjectEvent();
+        public UnityObjectEvent OnTriggerHairlineStart;
         /// <summary>
         /// Emits the TriggerHairlineEnd class event.
         /// </summary>
-        public UnityObjectEvent OnTriggerHairlineEnd = new UnityObjectEvent();
+        public UnityObjectEvent OnTriggerHairlineEnd;
         /// <summary>
         /// Emits the TriggerClicked class event.
         /// </summary>
-        public UnityObjectEvent OnTriggerClicked = new UnityObjectEvent();
+        public UnityObjectEvent OnTriggerClicked;
         /// <summary>
         /// Emits the TriggerUnclicked class event.
         /// </summary>
-        public UnityObjectEvent OnTriggerUnclicked = new UnityObjectEvent();
+        public UnityObjectEvent OnTriggerUnclicked;
         /// <summary>
         /// Emits the TriggerAxisChanged class event.
         /// </summary>
-        public UnityObjectEvent OnTriggerAxisChanged = new UnityObjectEvent();
+        public UnityObjectEvent OnTriggerAxisChanged;
 
         /// <summary>
         /// Emits the GripPressed class event.
         /// </summary>
-        public UnityObjectEvent OnGripPressed = new UnityObjectEvent();
+        public UnityObjectEvent OnGripPressed;
         /// <summary>
         /// Emits the GripReleased class event.
         /// </summary>
-        public UnityObjectEvent OnGripReleased = new UnityObjectEvent();
+        public UnityObjectEvent OnGripReleased;
         /// <summary>
         /// Emits the GripTouchStart class event.
         /// </summary>
-        public UnityObjectEvent OnGripTouchStart = new UnityObjectEvent();
+        public UnityObjectEvent OnGripTouchStart;
         /// <summary>
         /// Emits the GripTouchEnd class event.
         /// </summary>
-        public UnityObjectEvent OnGripTouchEnd = new UnityObjectEvent();
+        public UnityObjectEvent OnGripTouchEnd;
         /// <summary>
         /// Emits the GripHairlineStart class event.
         /// </summary>
-        public UnityObjectEvent OnGripHairlineStart = new UnityObjectEvent();
+        public UnityObjectEvent OnGripHairlineStart;
         /// <summary>
         /// Emits the GripHairlineEnd class event.
         /// </summary>
-        public UnityObjectEvent OnGripHairlineEnd = new UnityObjectEvent();
+        public UnityObjectEvent OnGripHairlineEnd;
         /// <summary>
         /// Emits the GripClicked class event.
         /// </summary>
-        public UnityObjectEvent OnGripClicked = new UnityObjectEvent();
+        public UnityObjectEvent OnGripClicked;
         /// <summary>
         /// Emits the GripUnclicked class event.
         /// </summary>
-        public UnityObjectEvent OnGripUnclicked = new UnityObjectEvent();
+        public UnityObjectEvent OnGripUnclicked;
         /// <summary>
         /// Emits the GripAxisChanged class event.
         /// </summary>
-        public UnityObjectEvent OnGripAxisChanged = new UnityObjectEvent();
+        public UnityObjectEvent OnGripAxisChanged;
 
         /// <summary>
         /// Emits the TouchpadPressed class event.
         /// </summary>
-        public UnityObjectEvent OnTouchpadPressed = new UnityObjectEvent();
+        public UnityObjectEvent OnTouchpadPressed;
         /// <summary>
         /// Emits the TouchpadReleased class event.
         /// </summary>
-        public UnityObjectEvent OnTouchpadReleased = new UnityObjectEvent();
+        public UnityObjectEvent OnTouchpadReleased;
         /// <summary>
         /// Emits the TouchpadTouchStart class event.
         /// </summary>
-        public UnityObjectEvent OnTouchpadTouchStart = new UnityObjectEvent();
+        public UnityObjectEvent OnTouchpadTouchStart;
         /// <summary>
         /// Emits the TouchpadTouchEnd class event.
         /// </summary>
-        public UnityObjectEvent OnTouchpadTouchEnd = new UnityObjectEvent();
+        public UnityObjectEvent OnTouchpadTouchEnd;
         /// <summary>
         /// Emits the TouchpadAxisChanged class event.
         /// </summary>
-        public UnityObjectEvent OnTouchpadAxisChanged = new UnityObjectEvent();
+        public UnityObjectEvent OnTouchpadAxisChanged;
 
         /// <summary>
         /// Emits the ButtonOnePressed class event.
         /// </summary>
-        public UnityObjectEvent OnButtonOnePressed = new UnityObjectEvent();
+        public UnityObjectEvent OnButtonOnePressed;
         /// <summary>
         /// Emits the ButtonOneReleased class event.
         /// </summary>
-        public UnityObjectEvent OnButtonOneReleased = new UnityObjectEvent();
+        public UnityObjectEvent OnButtonOneReleased;
         /// <summary>
         /// Emits the ButtonOneTouchStart class event.
         /// </summary>
-        public UnityObjectEvent OnButtonOneTouchStart = new UnityObjectEvent();
+        public UnityObjectEvent OnButtonOneTouchStart;
         /// <summary>
         /// Emits the ButtonOneTouchEnd class event.
         /// </summary>
-        public UnityObjectEvent OnButtonOneTouchEnd = new UnityObjectEvent();
+        public UnityObjectEvent OnButtonOneTouchEnd;
 
         /// <summary>
         /// Emits the ButtonTwoPressed class event.
         /// </summary>
-        public UnityObjectEvent OnButtonTwoPressed = new UnityObjectEvent();
+        public UnityObjectEvent OnButtonTwoPressed;
         /// <summary>
         /// Emits the ButtonTwoReleased class event.
         /// </summary>
-        public UnityObjectEvent OnButtonTwoReleased = new UnityObjectEvent();
+        public UnityObjectEvent OnButtonTwoReleased;
         /// <summary>
         /// Emits the ButtonTwoTouchStart class event.
         /// </summary>
-        public UnityObjectEvent OnButtonTwoTouchStart = new UnityObjectEvent();
+        public UnityObjectEvent OnButtonTwoTouchStart;
         /// <summary>
         /// Emits the ButtonTwoTouchEnd class event.
         /// </summary>
-        public UnityObjectEvent OnButtonTwoTouchEnd = new UnityObjectEvent();
-
-        /// <summary>
-        /// Emits the StartMenuPressed class event.
-        /// </summary>
-        public UnityObjectEvent OnStartMenuPressed = new UnityObjectEvent();
-        /// <summary>
-        /// Emits the StartMenuReleased class event.
-        /// </summary>
-        public UnityObjectEvent OnStartMenuReleased = new UnityObjectEvent();
+        public UnityObjectEvent OnButtonTwoTouchEnd;
 
         /// <summary>
         /// Emits the AliasPointerOn class event.
         /// </summary>
-        public UnityObjectEvent OnAliasPointerOn = new UnityObjectEvent();
+        public UnityObjectEvent OnAliasPointerOn;
         /// <summary>
         /// Emits the AliasPointerOff class event.
         /// </summary>
-        public UnityObjectEvent OnAliasPointerOff = new UnityObjectEvent();
+        public UnityObjectEvent OnAliasPointerOff;
         /// <summary>
         /// Emits the AliasPointerSet class event.
         /// </summary>
-        public UnityObjectEvent OnAliasPointerSet = new UnityObjectEvent();
+        public UnityObjectEvent OnAliasPointerSet;
         /// <summary>
         /// Emits the AliasGrabOn class event.
         /// </summary>
-        public UnityObjectEvent OnAliasGrabOn = new UnityObjectEvent();
+        public UnityObjectEvent OnAliasGrabOn;
         /// <summary>
         /// Emits the AliasGrabOff class event.
         /// </summary>
-        public UnityObjectEvent OnAliasGrabOff = new UnityObjectEvent();
+        public UnityObjectEvent OnAliasGrabOff;
         /// <summary>
         /// Emits the AliasUseOn class event.
         /// </summary>
-        public UnityObjectEvent OnAliasUseOn = new UnityObjectEvent();
+        public UnityObjectEvent OnAliasUseOn;
         /// <summary>
         /// Emits the AliasUseOff class event.
         /// </summary>
-        public UnityObjectEvent OnAliasUseOff = new UnityObjectEvent();
+        public UnityObjectEvent OnAliasUseOff;
         /// <summary>
         /// Emits the AliasMenuOn class event.
         /// </summary>
-        public UnityObjectEvent OnAliasUIClickOn = new UnityObjectEvent();
+        public UnityObjectEvent OnAliasUIClickOn;
         /// <summary>
         /// Emits the AliasMenuOff class event.
         /// </summary>
-        public UnityObjectEvent OnAliasUIClickOff = new UnityObjectEvent();
+        public UnityObjectEvent OnAliasUIClickOff;
         /// <summary>
         /// Emits the AliasUIClickOn class event.
         /// </summary>
-        public UnityObjectEvent OnAliasMenuOn = new UnityObjectEvent();
+        public UnityObjectEvent OnAliasMenuOn;
         /// <summary>
         /// Emits the AliasUIClickOff class event.
         /// </summary>
-        public UnityObjectEvent OnAliasMenuOff = new UnityObjectEvent();
+        public UnityObjectEvent OnAliasMenuOff;
         /// <summary>
         /// Emits the ControllerEnabled class event.
         /// </summary>
-        public UnityObjectEvent OnControllerEnabled = new UnityObjectEvent();
+        public UnityObjectEvent OnControllerEnabled;
         /// <summary>
         /// Emits the ControllerDisabled class event.
         /// </summary>
-        public UnityObjectEvent OnControllerDisabled = new UnityObjectEvent();
+        public UnityObjectEvent OnControllerDisabled;
         /// <summary>
         /// Emits the ControllerIndexChanged class event.
         /// </summary>
-        public UnityObjectEvent OnControllerIndexChanged = new UnityObjectEvent();
+        public UnityObjectEvent OnControllerIndexChanged;
 
         private void SetControllerEvents()
         {
@@ -258,9 +249,6 @@
             ce.ButtonTwoReleased += ButtonTwoReleased;
             ce.ButtonTwoTouchStart += ButtonTwoTouchStart;
             ce.ButtonTwoTouchEnd += ButtonTwoTouchEnd;
-
-            ce.StartMenuPressed += StartMenuPressed;
-            ce.StartMenuReleased += StartMenuReleased;
 
             ce.AliasPointerOn += AliasPointerOn;
             ce.AliasPointerOff += AliasPointerOff;
@@ -434,16 +422,6 @@
             OnButtonTwoTouchEnd.Invoke(o, e);
         }
 
-        private void StartMenuPressed(object o, ControllerInteractionEventArgs e)
-        {
-            OnStartMenuPressed.Invoke(o, e);
-        }
-
-        private void StartMenuReleased(object o, ControllerInteractionEventArgs e)
-        {
-            OnStartMenuReleased.Invoke(o, e);
-        }
-
         private void AliasPointerOn(object o, ControllerInteractionEventArgs e)
         {
             OnAliasPointerOn.Invoke(o, e);
@@ -556,9 +534,6 @@
             ce.ButtonTwoReleased -= ButtonTwoReleased;
             ce.ButtonTwoTouchStart -= ButtonTwoTouchStart;
             ce.ButtonTwoTouchEnd -= ButtonTwoTouchEnd;
-
-            ce.StartMenuPressed -= StartMenuPressed;
-            ce.StartMenuReleased -= StartMenuReleased;
 
             ce.AliasPointerOn -= AliasPointerOn;
             ce.AliasPointerOff -= AliasPointerOff;

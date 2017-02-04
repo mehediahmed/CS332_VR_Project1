@@ -17,7 +17,7 @@ namespace VRTK
         [Tooltip("Follow the scale of the given object.")]
         public bool followScale = true;
 
-        protected virtual void Update()
+        private void Update()
         {
             if (objectToFollow != null)
             {

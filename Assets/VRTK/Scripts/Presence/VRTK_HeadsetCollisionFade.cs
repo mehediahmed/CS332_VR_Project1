@@ -25,19 +25,13 @@ namespace VRTK
         private VRTK_HeadsetCollision headsetCollision;
         private VRTK_HeadsetFade headsetFade;
 
-        protected virtual void OnEnable()
+        private void OnEnable()
         {
             headsetFade = GetComponent<VRTK_HeadsetFade>();
             headsetCollision = GetComponent<VRTK_HeadsetCollision>();
 
             headsetCollision.HeadsetCollisionDetect += new HeadsetCollisionEventHandler(OnHeadsetCollisionDetect);
             headsetCollision.HeadsetCollisionEnded += new HeadsetCollisionEventHandler(OnHeadsetCollisionEnded);
-        }
-
-        protected virtual void OnDisable()
-        {
-            headsetCollision.HeadsetCollisionDetect -= new HeadsetCollisionEventHandler(OnHeadsetCollisionDetect);
-            headsetCollision.HeadsetCollisionEnded -= new HeadsetCollisionEventHandler(OnHeadsetCollisionEnded);
         }
 
         private void OnHeadsetCollisionDetect(object sender, HeadsetCollisionEventArgs e)
@@ -48,6 +42,12 @@ namespace VRTK
         private void OnHeadsetCollisionEnded(object sender, HeadsetCollisionEventArgs e)
         {
             headsetFade.Unfade(blinkTransitionSpeed);
+        }
+
+        private void OnDisable()
+        {
+            headsetCollision.HeadsetCollisionDetect -= new HeadsetCollisionEventHandler(OnHeadsetCollisionDetect);
+            headsetCollision.HeadsetCollisionEnded -= new HeadsetCollisionEventHandler(OnHeadsetCollisionEnded);
         }
     }
 }

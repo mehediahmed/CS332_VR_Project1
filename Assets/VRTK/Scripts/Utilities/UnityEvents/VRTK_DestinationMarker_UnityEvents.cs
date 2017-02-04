@@ -14,15 +14,15 @@
         /// <summary>
         /// Emits the DestinationMarkerEnter class event.
         /// </summary>
-        public UnityObjectEvent OnDestinationMarkerEnter = new UnityObjectEvent();
+        public UnityObjectEvent OnDestinationMarkerEnter;
         /// <summary>
         /// Emits the DestinationMarkerExit class event.
         /// </summary>
-        public UnityObjectEvent OnDestinationMarkerExit = new UnityObjectEvent();
+        public UnityObjectEvent OnDestinationMarkerExit;
         /// <summary>
         /// Emits the DestinationMarkerSet class event.
         /// </summary>
-        public UnityObjectEvent OnDestinationMarkerSet = new UnityObjectEvent();
+        public UnityObjectEvent OnDestinationMarkerSet;
 
         private void SetDestinationMarker()
         {

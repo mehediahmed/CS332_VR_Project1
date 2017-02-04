@@ -152,7 +152,7 @@ namespace VRTK
         /// The InitaliseHighlightObject method sets up the highlight object based on the given Highlight Object Prefab.
         /// </summary>
         /// <param name="removeOldObject">If this is set to true then it attempts to delete the old highlight object if it exists. Defaults to `false`</param>
-        public virtual void InitaliseHighlightObject(bool removeOldObject = false)
+        public void InitaliseHighlightObject(bool removeOldObject = false)
         {
             //force delete previous created highlight object
             if (removeOldObject)
@@ -170,12 +170,11 @@ namespace VRTK
         /// the ForceSnap method attempts to automatically attach a valid game object to the snap drop zone.
         /// </summary>
         /// <param name="objectToSnap">The GameObject to attempt to snap.</param>
-        public virtual void ForceSnap(GameObject objectToSnap)
+        public void ForceSnap(GameObject objectToSnap)
         {
             var ioCheck = objectToSnap.GetComponentInParent<VRTK_InteractableObject>();
             if (ioCheck)
             {
-                ioCheck.SaveCurrentState();
                 StopCoroutine("AttemptForceSnapAtEndOfFrame");
                 if (ioCheck.IsGrabbed())
                 {
@@ -192,7 +191,7 @@ namespace VRTK
         /// <summary>
         /// The ForceUnsnap method attempts to automatically remove the current snapped game object from the snap drop zone.
         /// </summary>
-        public virtual void ForceUnsnap()
+        public void ForceUnsnap()
         {
             if (isSnapped && currentSnappedObject)
             {
@@ -201,7 +200,7 @@ namespace VRTK
             }
         }
 
-        protected virtual void Awake()
+        private void Awake()
         {
             if (Application.isPlaying)
             {
@@ -209,7 +208,7 @@ namespace VRTK
             }
         }
 
-        protected virtual void OnApplicationQuit()
+        private void OnApplicationQuit()
         {
             if (objectHighlighter)
             {
@@ -217,7 +216,7 @@ namespace VRTK
             }
         }
 
-        protected virtual void Update()
+        private void Update()
         {
             //If the highlightObjectPrefab has changed then delete the highlight object in preparation to create a new one
             if (previousPrefab != null && previousPrefab != highlightObjectPrefab)
@@ -237,7 +236,7 @@ namespace VRTK
             }
         }
 
-        protected virtual void OnTriggerEnter(Collider collider)
+        private void OnTriggerEnter(Collider collider)
         {
             //if there is no current valid snappable object and the zone isn't being snapped then attempt to highlight
             if (!isSnapped && currentValidSnapObject == null)
@@ -246,7 +245,7 @@ namespace VRTK
             }
         }
 
-        protected virtual void OnTriggerExit(Collider collider)
+        private void OnTriggerExit(Collider collider)
         {
             //if the current valid snapped object is the collider leaving the trigger then attempt to turn off the highlighter
             if (currentValidSnapObject == collider.gameObject)
@@ -255,7 +254,7 @@ namespace VRTK
             }
         }
 
-        protected virtual void OnTriggerStay(Collider collider)
+        private void OnTriggerStay(Collider collider)
         {
             //Do sanity check to see if there should be a snappable object
             if (!isSnapped && currentValidSnapObject == null && ValidSnapObject(collider.gameObject, true))

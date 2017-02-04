@@ -33,7 +33,7 @@ namespace VRTK
         private bool isColliding = false;
         private float collideTimer = 0f;
 
-        protected virtual void OnEnable()
+        private void OnEnable()
         {
             lastGoodPositionSet = false;
             headset = VRTK_DeviceFinder.HeadsetTransform();
@@ -46,12 +46,12 @@ namespace VRTK
             }
         }
 
-        protected virtual void OnDisable()
+        private void OnDisable()
         {
             ManageHeadsetListeners(false);
         }
 
-        protected virtual void Update()
+        private void Update()
         {
             if (isColliding)
             {
@@ -68,7 +68,7 @@ namespace VRTK
             }
         }
 
-        protected virtual void FixedUpdate()
+        private void FixedUpdate()
         {
             if (!isColliding && playArea)
             {

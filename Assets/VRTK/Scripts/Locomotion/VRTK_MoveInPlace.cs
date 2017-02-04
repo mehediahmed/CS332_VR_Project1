@@ -175,7 +175,7 @@ namespace VRTK
             return curSpeed;
         }
 
-        protected virtual void Awake()
+        private void Awake()
         {
             controllerLeftHand = VRTK_DeviceFinder.GetControllerLeftHand();
             controllerRightHand = VRTK_DeviceFinder.GetControllerRightHand();
@@ -184,19 +184,19 @@ namespace VRTK
             SetControlOptions(controlOptions);
         }
 
-        protected virtual void OnEnable()
+        private void OnEnable()
         {
             engageButtonPressed += DoTouchpadDown;
             engageButtonUp += DoTouchpadUp;
         }
 
-        protected virtual void OnDisable()
+        private void OnDisable()
         {
             engageButtonPressed -= DoTouchpadDown;
             engageButtonUp -= DoTouchpadUp;
         }
 
-        protected virtual void Start()
+        private void Start()
         {
             playArea = VRTK_DeviceFinder.PlayAreaTransform();
             SetControllerListeners(controllerLeftHand);
@@ -214,7 +214,26 @@ namespace VRTK
             }
         }
 
-        protected virtual void FixedUpdate()
+        private void DoTouchpadDown(object sender, ControllerInteractionEventArgs e)
+        {
+            active = true;
+        }
+
+        private void DoTouchpadUp(object sender, ControllerInteractionEventArgs e)
+        {
+            // If the button is released, clear all the lists.
+            foreach (Transform obj in trackedObjects)
+            {
+                movementList[obj].Clear();
+            }
+            initalGaze = Vector3.zero;
+            direction = Vector3.zero;
+            curSpeed = 0;
+
+            active = false;
+        }
+
+        private void FixedUpdate()
         {
             // If Move In Place is currently engaged.
             if (active)
@@ -324,25 +343,6 @@ namespace VRTK
             {
                 playArea.position = new Vector3(movement.x + playArea.position.x, playArea.position.y, movement.z + playArea.position.z);
             }
-        }
-
-        private void DoTouchpadDown(object sender, ControllerInteractionEventArgs e)
-        {
-            active = true;
-        }
-
-        private void DoTouchpadUp(object sender, ControllerInteractionEventArgs e)
-        {
-            // If the button is released, clear all the lists.
-            foreach (Transform obj in trackedObjects)
-            {
-                movementList[obj].Clear();
-            }
-            initalGaze = Vector3.zero;
-            direction = Vector3.zero;
-            curSpeed = 0;
-
-            active = false;
         }
 
         private Quaternion DetermineAverageControllerRotation()
@@ -517,10 +517,6 @@ namespace VRTK
                         case VRTK_ControllerEvents.ButtonAlias.Button_Two_Touch:
                             controllerEvent.ButtonTwoTouchStart -= engageButtonPressed;
                             controllerEvent.ButtonTwoTouchEnd -= engageButtonUp;
-                            break;
-                        case VRTK_ControllerEvents.ButtonAlias.Start_Menu_Press:
-                            controllerEvent.StartMenuPressed -= engageButtonPressed;
-                            controllerEvent.StartMenuReleased -= engageButtonUp;
                             break;
                     }
                     subscribed = false;

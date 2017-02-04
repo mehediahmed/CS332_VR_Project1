@@ -107,7 +107,7 @@ namespace VRTK
             }
         }
 
-        protected virtual void Update()
+        private void Update()
         {
             thickness = (int)Mathf.Clamp(thickness, 0, rectTransform.rect.width / 2);
         }

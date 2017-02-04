@@ -14,11 +14,11 @@
         /// <summary>
         /// Emits the PlayerClimbStarted class event.
         /// </summary>
-        public UnityObjectEvent OnPlayerClimbStarted = new UnityObjectEvent();
+        public UnityObjectEvent OnPlayerClimbStarted;
         /// <summary>
         /// Emits the PlayerClimbEnded class event.
         /// </summary>
-        public UnityObjectEvent OnPlayerClimbEnded = new UnityObjectEvent();
+        public UnityObjectEvent OnPlayerClimbEnded;
 
         private void SetPlayerClimb()
         {
