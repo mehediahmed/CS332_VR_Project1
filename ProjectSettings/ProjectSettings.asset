@@ -462,7 +462,7 @@ PlayerSettings:
     Collab: 0
     ErrorHub: 0
     Hub: 0
-    UNet: 0
+    UNet: 1
   cloudProjectId: 09cf393c-252f-42db-915b-1c020a53646b
   projectName: ShadowLock_VR
   organizationId: mehedi-ahmed
