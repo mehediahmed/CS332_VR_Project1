@@ -93,7 +93,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14794b181392b1a4e9a83c789f0f24fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObjectName: First Person Controller
 --- !u!136 &136063861415032126
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -115,7 +114,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1637309201625868}
   m_Enabled: 1
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

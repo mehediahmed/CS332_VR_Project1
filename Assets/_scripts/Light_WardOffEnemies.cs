@@ -35,4 +35,9 @@ public class Light_WardOffEnemies : MonoBehaviour
         // This is useful for lights that change size over time.
         obstacle.radius = lightComponent.range;
     }
+
+    public float GetRadius()
+    {
+        return obstacle.radius;
+    }
 }
