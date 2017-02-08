@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Crystal_Grab : MonoBehaviour {
+using VRTK;
+public class Crystal_Grab : VRTK_InteractGrab {
 
 	// Use this for initialization
 	void Start () {
