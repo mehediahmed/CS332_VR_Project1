@@ -5,60 +5,91 @@ using VRTK;
 
 public class Crystal_Interact : VRTK_InteractableObject
 {
-    public Light pointLight;
+
+    public Light ActiveLight;
+    
+    public Light PassiveLight;
     public float charges;
-    public float decayRate;
-    public float rechargeRate;
-    public float rangeIncrease;
-    public float intensityIncrease;
-	// Use this for initialization
-	void Start () {
-        charges = 100f;
-        pointLight = GetComponentInChildren<Light>();
+    public bool isActive;
+
+    void Start()
+    {
+        charges = 100;
         resetLight();
+        
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Update() {
+        ActiveLight.intensity = (float)(charges / 12.5);
+        if (charges > 100)
+        {
 
-    public override void StartUsing(GameObject usingObject)
+            charges = 100f;
+        }
+        if (charges < 0)
+        {
+
+            charges = 0;
+
+        }
+        if (isActive)
+        {
+            charges -= 20 * Time.deltaTime;
+            ActiveLight.intensity = (float)(charges/12.5f);
+
+        }
+         if (!isActive)
+        {
+            charges += 5 * Time.deltaTime;
+             
+
+        }
+     
+    }
+
+    public override void StartUsing(GameObject currentUsingObject)
     {
-        base.StartUsing(usingObject);
-        useLight();
-        StartCoroutine(decayCharges());
-        
+        base.StartUsing(currentUsingObject);
+        ActviateLight();
+       //StartCoroutine(decayCharges());
+       // StopCoroutine(recharge());
+
     }
     public override void StopUsing(GameObject previousUsingObject)
     {
         base.StopUsing(previousUsingObject);
-        StopCoroutine(decayCharges());
         resetLight();
-    }
-    public void useLight() {
-        pointLight.intensity = +intensityIncrease;
-        pointLight.range = + rangeIncrease;
-
+        //StartCoroutine(recharge());
+        //StopCoroutine(decayCharges());
     }
     IEnumerator decayCharges() {
-        charges =- decayRate;
-        yield return new WaitForSeconds(1);
+        charges = charges - 20f;
+        yield return new WaitForSeconds(1f);
+    }
+    IEnumerator recharge()
+    {
+        charges = charges + 5f;
+        yield return new WaitForSeconds(1f);
+
+    }
+    public void ActviateLight()
+    {
+        isActive = true;
+        ActiveLight.gameObject.SetActive(true);
+        PassiveLight.gameObject.SetActive(false);
+
 
 
     }
-    IEnumerator recharge() {
-        charges = +rechargeRate;
-        yield return new WaitForSeconds(1);
+    public void resetLight()
+    {
+        isActive = false;
+        ActiveLight.gameObject.SetActive(false);
+        PassiveLight.gameObject.SetActive(true);
+
+
+
     }
-
-    public void resetLight() {
-
-        pointLight.intensity = 1;
-        pointLight.range = 10f;
-    }
-
 
 }
 
