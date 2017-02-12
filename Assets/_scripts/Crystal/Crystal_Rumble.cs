@@ -11,6 +11,7 @@ public class Crystal_Rumble : VRTK_InteractHaptics
     public override void HapticsOnUse(VRTK_ControllerActions controllerActions)
     {
         base.HapticsOnUse(controllerActions);
+        strengthOnUse = interact.charges / 100f;
 
     }
     // Use this for initialization
@@ -20,8 +21,9 @@ public class Crystal_Rumble : VRTK_InteractHaptics
 	
 	// Update is called once per frame
 	void Update () {
+     
         strengthOnUse = interact.charges / 100f;
-	}
+	}   
 
 
 

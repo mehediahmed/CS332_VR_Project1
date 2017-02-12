@@ -26,6 +26,8 @@ public class RopeGun : VRTK_InteractableObject
     {
         base.StartUsing(currentUsingObject);
         FireBullet();
+        Debug.Log("use");
+
     }
 
     private void Start()
@@ -39,18 +41,11 @@ public class RopeGun : VRTK_InteractableObject
     {
         // If a bullet already exists, don't fire a bullet.
         // This makes sure that only one bullet exists at a time.
-        if (bullet.activeInHierarchy)
-        {
-            return;
-        }
-        // Move the bullet to the position of the bullet spawner. Rotation, too.
-        Transform bulletTransform = bullet.transform;
-        Transform bulletSpawnerTransform = bulletSpawner.transform;
-        bulletTransform.position = bulletSpawnerTransform.position;
-        bulletTransform.rotation = bulletSpawnerTransform.rotation;
-        // Activate the bullet.
-        bullet.SetActive(true);
-        // Send the bullet on its merry way!
+        GameObject bulletClone = Instantiate(bulletPrefab, bulletPrefab.transform.position, bulletPrefab.transform.rotation) as GameObject;
+        bulletClone.SetActive(true);
+        Rigidbody rb = bulletClone.GetComponent<Rigidbody>();
         rb.AddForce(-bullet.transform.forward * bulletSpeed);
+        Destroy(bulletClone, bulletLifetime);
+        Debug.Log("ddd");
     }
 }
