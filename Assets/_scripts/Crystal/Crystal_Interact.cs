@@ -11,6 +11,8 @@ public class Crystal_Interact : VRTK_InteractableObject
     public Light PassiveLight;
     public float charges;
     public bool isActive;
+    public float decayRate;
+    public float RechargeRate;
 
     void Start()
     {
@@ -34,13 +36,13 @@ public class Crystal_Interact : VRTK_InteractableObject
         }
         if (isActive)
         {
-            charges -= 20 * Time.deltaTime;
+            charges -= decayRate * Time.deltaTime;
             ActiveLight.intensity = (float)(charges/12.5f);
 
         }
          if (!isActive)
         {
-            charges += 5 * Time.deltaTime;
+            charges += RechargeRate * Time.deltaTime;
              
 
         }

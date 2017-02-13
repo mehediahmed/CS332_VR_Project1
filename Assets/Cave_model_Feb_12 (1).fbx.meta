@@ -1,0 +1,138 @@
+fileFormatVersion: 2
+guid: c9e37a79aeab3154c8b360c964b47e49
+timeCreated: 1486976727
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Cave_cavity
+    100002: Cave_cavity_2
+    100004: Cave_chamber
+    100006: Cave_floor
+    100008: //RootNode
+    100010: Cave_wall_1
+    100012: Cave_wall_2
+    100014: Climbing_platform_ishh
+    100016: Climbing_platform_ishh_2
+    100018: Connecting_wall_entrance_thing
+    100020: Small_big_entrance
+    400000: Cave_cavity
+    400002: Cave_cavity_2
+    400004: Cave_chamber
+    400006: Cave_floor
+    400008: //RootNode
+    400010: Cave_wall_1
+    400012: Cave_wall_2
+    400014: Climbing_platform_ishh
+    400016: Climbing_platform_ishh_2
+    400018: Connecting_wall_entrance_thing
+    400020: Small_big_entrance
+    2300000: Cave_cavity
+    2300002: Cave_cavity_2
+    2300004: Cave_chamber
+    2300006: Cave_floor
+    2300008: Cave_wall_1
+    2300010: Cave_wall_2
+    2300012: Climbing_platform_ishh
+    2300014: Climbing_platform_ishh_2
+    2300016: Connecting_wall_entrance_thing
+    2300018: Small_big_entrance
+    3300000: Cave_cavity
+    3300002: Cave_cavity_2
+    3300004: Cave_chamber
+    3300006: Cave_floor
+    3300008: Cave_wall_1
+    3300010: Cave_wall_2
+    3300012: Climbing_platform_ishh
+    3300014: Climbing_platform_ishh_2
+    3300016: Connecting_wall_entrance_thing
+    3300018: Small_big_entrance
+    4300000: Cave_cavity_2
+    4300002: Cave_chamber
+    4300004: Small_big_entrance
+    4300006: Connecting_wall_entrance_thing
+    4300008: Cave_cavity
+    4300010: Cave_wall_1
+    4300012: Cave_wall_2
+    4300014: Climbing_platform_ishh
+    4300016: Climbing_platform_ishh_2
+    4300018: Cave_floor
+    6400000: Cave_cavity
+    6400002: Cave_cavity_2
+    6400004: Cave_chamber
+    6400006: Cave_floor
+    6400008: Cave_wall_1
+    6400010: Cave_wall_2
+    6400012: Climbing_platform_ishh
+    6400014: Climbing_platform_ishh_2
+    6400016: Connecting_wall_entrance_thing
+    6400018: Small_big_entrance
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
