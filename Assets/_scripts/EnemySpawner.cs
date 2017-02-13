@@ -58,8 +58,8 @@ public class EnemySpawner : MonoBehaviour
         halffov = horizontalfov * Mathf.Rad2Deg * 0.5f;
         // Add a few extra degrees to prevent enemies from spawning directly on the edge of the camera's vision.
         halffov += 10f;
-        // Start the timer-based enemy spawning.
-        InvokeRepeating("SpawnEnemy", timeBetweenEnemySpawns, timeBetweenEnemySpawns);
+        // Start the timer-based enemy spawning coroutine.
+        StartCoroutine("SpawnTimer");
     }
 
     private void Update()
@@ -80,6 +80,18 @@ public class EnemySpawner : MonoBehaviour
         Debug.DrawRay(campos, camrotxvec2, Color.red);
         Debug.DrawRay(campos, spawnline, Color.blue);
 #endif
+    }
+
+    // Repeated spawning coroutine.
+    IEnumerator SpawnTimer()
+    {
+        // Loop indefinitely.
+        while (true)
+        {
+            // Wait, then spawn an enemy.
+            yield return new WaitForSeconds(timeBetweenEnemySpawns);
+            SpawnEnemy();
+        }
     }
 
     // Spawn an enemy.
@@ -162,8 +174,8 @@ public class EnemySpawner : MonoBehaviour
                         //agent.enabled = false;
                         // Move the enemy.
                         enemy.transform.position = desiredPosition;
-                        //agent.enabled = true;
                         // Activate the enemy.
+                        agent.enabled = true;
                         enemy.SetActive(true);
                         // Return the reference to this enemy.
                         return enemy;

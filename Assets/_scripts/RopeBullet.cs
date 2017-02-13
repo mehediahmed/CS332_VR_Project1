@@ -7,16 +7,12 @@ public class RopeBullet : MonoBehaviour
 {
     // Reference to the rope object.
     public GameObject rope;
-
-
-    // Number of seconds remaining before being deactivated.
+    // Rope object's lifetime.
     public float life;
 
     private void Update()
     {
-        // If the bullet's life runs out, disable it.
         life -= Time.deltaTime;
-     
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -29,7 +25,6 @@ public class RopeBullet : MonoBehaviour
             ropeClone.SetActive(true);
             Destroy(this, life);
             Destroy(ropeClone, life);
-
         }
     }
 }
