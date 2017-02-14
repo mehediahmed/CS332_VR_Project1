@@ -75,6 +75,8 @@ public class RopeGun : VRTK_InteractableObject
         {
             target = Instantiate(marker, pos, Quaternion.identity);
             origin_rope_tube.target = target.transform;
+            // Rigidbody is required by the Rope_Tube class for rope construction
+            origin.AddComponent<Rigidbody>();
             origin_rope_tube.BuildRope();
             ResetTarget();
         }

@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 135478308999817104}
   - component: {fileID: 23687382906783646}
   - component: {fileID: 54282052729939606}
-  - component: {fileID: 114864650600561020}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -455,19 +454,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   marker: {fileID: 1403956801928974, guid: 52a4127c2d0678c42a4fd8230663c6e9, type: 2}
---- !u!114 &114864650600561020
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1273138068809396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f03375707fa1c747a02f5f02ca671e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rope: {fileID: 0}
-  life: 30
 --- !u!135 &135478308999817104
 SphereCollider:
   m_ObjectHideFlags: 1

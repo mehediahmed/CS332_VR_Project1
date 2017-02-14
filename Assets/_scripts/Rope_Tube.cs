@@ -21,7 +21,7 @@ How To Use:
 */
 
 // Require a Rigidbody
-//[RequireComponent (typeof (Rigidbody))]
+[RequireComponent (typeof (Rigidbody))]
 
 public class Rope_Tube : MonoBehaviour
 {
@@ -176,6 +176,7 @@ public class Rope_Tube : MonoBehaviour
 		rope = true;
 	}
 
+    // Added by Paul:
     public void DestroyRope()
     {
         Destroy(tubeRenderer);
