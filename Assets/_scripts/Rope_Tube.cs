@@ -118,6 +118,11 @@ public class Rope_Tube : MonoBehaviour
 		// Find the amount of segments based on the distance and resolution
 		// Example: [resolution of 1.0 = 1 joint per unit of distance]
 		segments = Mathf.RoundToInt(Vector3.Distance(transform.position,target.position)*resolution);
+        // Added this segment check to prevent an error caused by ropes that are too short. -Paul
+        if (segments < 2)
+        {
+            segments = 2;
+        }
 		if(material) 
 		{
 			material.SetTextureScale("_MainTex", new Vector2(1,segments+2));
