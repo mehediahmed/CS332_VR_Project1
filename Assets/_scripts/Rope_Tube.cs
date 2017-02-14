@@ -182,8 +182,18 @@ public class Rope_Tube : MonoBehaviour
 			transform.GetComponent<Rigidbody>().isKinematic = true;
 		}
 
-		// Rope = true, The rope now exists in the scene!
-		rope = true;
+        // Rope = true, The rope now exists in the scene!
+        rope = true;
+
+        /*
+        foreach(GameObject joint in joints)
+        {
+            Destroy(joint);
+        }
+        */
+        //Destroy(transform.GetComponent<Rigidbody>());
+
+        line.PrepareToUpdateMesh();
 	}
 
     // Added by Paul:
@@ -234,6 +244,7 @@ public class Rope_Tube : MonoBehaviour
 		{
 			ph.connectedBody = joints[n-1].GetComponent<Rigidbody>();   
 		}
+
 	}
     
 }
