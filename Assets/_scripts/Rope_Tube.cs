@@ -36,6 +36,7 @@ public class Rope_Tube : MonoBehaviour
 	public bool startRestrained = true;
 	public bool endRestrained = true;
 	public bool useMeshCollision = true;
+    public bool buildRopeImmediately = false;
 
 	// Private Variables (Only change if you know what your doing)
 	private Vector3[] segmentPos;
@@ -70,16 +71,20 @@ public class Rope_Tube : MonoBehaviour
 		}
 	}
 
+    // Added the extra "buildRopeImmediately" conditional to the Awake function because we don't want the rope to be constructed immediately in some cases. -Paul
 	void Awake()
 	{
-		if(target)
-		{
-			BuildRope();
-		}
-		else 
-		{
-			Debug.LogError("You must have a gameobject attached to target: " + this.name,this);   
-		}
+        if (buildRopeImmediately)
+        {
+            if (target)
+            {
+                BuildRope();
+            }
+            else
+            {
+                Debug.LogError("You must have a gameobject attached to target: " + this.name, this);
+            }
+        }
 	}
 
 	void LateUpdate()

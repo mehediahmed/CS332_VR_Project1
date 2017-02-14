@@ -1,22 +1,26 @@
-﻿
+﻿// Author(s): Mehedi Ahmed, Paul Calande
+// Primary script for the rope gun.
+
 using UnityEngine;
 
 using VRTK;
 
 public class RopeGun : VRTK_InteractableObject
 {
-    // Reference to the "bullet" prefab (the bullet opening of the gun).
+    // Reference to the "bullet" child prefab (the bullet opening of the gun).
     public GameObject bullet;
     // Layer mask for raycasting.
     public LayerMask targetLayer;
     // Reference to the marker object.
     public GameObject marker;
 
-    private bool isTargetSet = false;
     private Vector3 pos;
-    private GameObject origin;
-    private GameObject target;
-    private Rope_Tube origin_rope_tube;
+
+    // The following variables are static to ensure that one rope is shared between all rope guns.
+    private static bool isTargetSet = false;
+    private static GameObject origin;
+    private static GameObject target;
+    private static Rope_Tube origin_rope_tube;
 
 
 
@@ -39,23 +43,23 @@ public class RopeGun : VRTK_InteractableObject
     protected override void Update()
     {
         base.Update();
-        Debug.DrawRay(bullet.transform.position, -transform.forward);
+        //Debug.DrawRay(bullet.transform.position, -transform.forward);
     }
 
     private void Raycasting()
     {
         Ray ray = new Ray(bullet.transform.position, -transform.forward);
 
-        Debug.DrawRay(bullet.transform.position, -transform.forward);
+        //Debug.DrawRay(bullet.transform.position, -transform.forward);
 
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 10000f, targetLayer))
         {
-            Debug.DrawLine(transform.position, hit.point);
+            //Debug.DrawLine(transform.position, hit.point);
             {
                 //Debug.Log("hit");
                 pos = hit.point;
-                Debug.DrawRay(bullet.transform.position, -transform.forward);
+                //Debug.DrawRay(bullet.transform.position, -transform.forward);
                 SpawnRope();
             }
         }
@@ -65,18 +69,16 @@ public class RopeGun : VRTK_InteractableObject
     {
         if (!isTargetSet)
         {
-            //DestroyOldRope();
+            DestroyOldRope();
 
             origin = Instantiate(marker, pos, Quaternion.identity);
-            origin_rope_tube = origin.AddComponent<Rope_Tube>();
             isTargetSet = true;
         }
         else
         {
             target = Instantiate(marker, pos, Quaternion.identity);
+            origin_rope_tube = origin.AddComponent<Rope_Tube>();
             origin_rope_tube.target = target.transform;
-            // Rigidbody is required by the Rope_Tube class for rope construction
-            origin.AddComponent<Rigidbody>();
             origin_rope_tube.BuildRope();
             ResetTarget();
         }
@@ -89,13 +91,18 @@ public class RopeGun : VRTK_InteractableObject
 
     public void DestroyOldRope()
     {
-        origin_rope_tube.DestroyRope();
-        Destroy(origin);
-        Destroy(target);
+        if (origin_rope_tube)
+        {
+            origin_rope_tube.DestroyRope();
+            Destroy(origin);
+            Destroy(target);
+        }
     }
 
+    /*
     void OnDrawGizmos()
     {
         Gizmos.DrawSphere(pos, 1f);
     }
+    */
 }
