@@ -30,7 +30,7 @@ public class Rope_Tube : MonoBehaviour
 	public Material material;
 	public float ropeWidth = 0.1f;
 	public float resolution = 0.5f;
-	public float ropeDrag = 0.1f;
+    public float ropeDrag = 0.1f;
 	public float ropeMass = 0.5f;
 	public int radialSegments = 6;
 	public bool startRestrained = true;
@@ -141,6 +141,7 @@ public class Rope_Tube : MonoBehaviour
 		int segs = segments-1;
 		Vector3 seperation = ((target.position - transform.position)/segs);
 
+        
 		for(int s=0;s < segments;s++)
 		{
 			// Find the each segments position using the slope from above
@@ -151,8 +152,13 @@ public class Rope_Tube : MonoBehaviour
 			AddJointPhysics(s);
 		}
 
-		// Attach the joints to the target object and parent it to this object
-		CharacterJoint end = target.gameObject.AddComponent(typeof(CharacterJoint)) as CharacterJoint;
+        // -=- START -=-
+        //segmentPos[0] = transform.position;
+        //AddJointPhysics(0);
+        // -=- END -=-
+
+        // Attach the joints to the target object and parent it to this object
+        CharacterJoint end = target.gameObject.AddComponent(typeof(CharacterJoint)) as CharacterJoint;
 		end.connectedBody = joints[joints.Length-1].transform.GetComponent<Rigidbody>();
 		end.swingAxis = swingAxis;
 		
@@ -233,10 +239,12 @@ public class Rope_Tube : MonoBehaviour
 
 		joints[n].transform.position = segmentPos[n];
 
-		rigid.drag = ropeDrag;
-		rigid.mass = ropeMass;
+		//rigid.drag = ropeDrag;
+		//rigid.mass = ropeMass;
+        // ALTERNATE:
+        rigid.drag = rigid.mass = 0.0f;
 
-		if(n==0)
+        if (n==0)
 		{     
 			ph.connectedBody = transform.GetComponent<Rigidbody>();
 		} 
