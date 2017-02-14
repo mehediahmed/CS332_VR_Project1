@@ -21,7 +21,7 @@ How To Use:
 */
 
 // Require a Rigidbody
-[RequireComponent (typeof (Rigidbody))]
+//[RequireComponent (typeof (Rigidbody))]
 
 public class Rope_Tube : MonoBehaviour
 {
@@ -176,6 +176,12 @@ public class Rope_Tube : MonoBehaviour
 		rope = true;
 	}
 
+    public void DestroyRope()
+    {
+        Destroy(tubeRenderer);
+    }
+
+    
 	void AddJointPhysics(int n)
 	{
 		joints[n] = new GameObject("Joint_" + n);
@@ -218,4 +224,5 @@ public class Rope_Tube : MonoBehaviour
 			ph.connectedBody = joints[n-1].GetComponent<Rigidbody>();   
 		}
 	}
+    
 }

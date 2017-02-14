@@ -5,93 +5,94 @@ using VRTK;
 
 public class Crystal_Interact : VRTK_InteractableObject
 {
-
+    // References to the active and passive lights.
     public Light ActiveLight;
-    
     public Light PassiveLight;
-    public float charges;
-    public bool isActive;
+
+    // The rate at which the crystal charge decays when in use.
     public float decayRate;
+    // The rate at which the crystal recharges when not in use.
     public float RechargeRate;
+    // The maximum charge of the crystal.
+    public float maxCharges;
+    // The minimum charge of the crystal required before using it.
+    // This prevents the player from simply holding the trigger button forever and being safe as a result.
+    public float minimumThreshold;
+
+    private bool isActive;
+    private float charges;
+
+    // Division is an expensive operation, so calculating this constant ahead of time will help performance. -Paul
+    private float intensityFactor = 1f / 12.5f;
 
     void Start()
     {
-        charges = 100;
-        resetLight();
-        
-
+        charges = maxCharges;
+        ResetLight();
     }
-    void Update() {
-        ActiveLight.intensity = (float)(charges / 12.5);
-        if (charges > 100)
-        {
 
-            charges = 100f;
+    protected override void Update()
+    {
+        base.Update();
+
+        ActiveLight.intensity = charges * intensityFactor;
+        PassiveLight.intensity = ActiveLight.intensity;
+        if (charges > maxCharges)
+        {
+            charges = maxCharges;
         }
-        if (charges < 0)
+        if (charges < 0f)
         {
-
-            charges = 0;
-
+            charges = 0f;
+        }
+        // If the charge runs out, automatically disable the light.
+        if (charges == 0f)
+        {
+            ResetLight();
         }
         if (isActive)
         {
             charges -= decayRate * Time.deltaTime;
-            ActiveLight.intensity = (float)(charges/12.5f);
-
         }
-         if (!isActive)
+        if (!isActive)
         {
             charges += RechargeRate * Time.deltaTime;
-             
-
         }
-     
     }
 
     public override void StartUsing(GameObject currentUsingObject)
     {
         base.StartUsing(currentUsingObject);
-        ActviateLight();
-       //StartCoroutine(decayCharges());
-       // StopCoroutine(recharge());
-
+        ActivateLight();
     }
+
     public override void StopUsing(GameObject previousUsingObject)
     {
         base.StopUsing(previousUsingObject);
-        resetLight();
-        //StartCoroutine(recharge());
-        //StopCoroutine(decayCharges());
+        ResetLight();
     }
-    IEnumerator decayCharges() {
-        charges = charges - 20f;
-        yield return new WaitForSeconds(1f);
-    }
-    IEnumerator recharge()
+
+    public void ActivateLight()
     {
-        charges = charges + 5f;
-        yield return new WaitForSeconds(1f);
-
+        // Only activate the light if the charge is above the minimum threshold.
+        if (charges > minimumThreshold)
+        {
+            isActive = true;
+            ActiveLight.gameObject.SetActive(true);
+            PassiveLight.gameObject.SetActive(false);
+        }
     }
-    public void ActviateLight()
-    {
-        isActive = true;
-        ActiveLight.gameObject.SetActive(true);
-        PassiveLight.gameObject.SetActive(false);
 
-
-
-    }
-    public void resetLight()
+    public void ResetLight()
     {
         isActive = false;
         ActiveLight.gameObject.SetActive(false);
         PassiveLight.gameObject.SetActive(true);
-
-
-
     }
 
+    public float getCharges()
+    {
+        return charges;
+    }
 }
 

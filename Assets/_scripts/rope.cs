@@ -2,19 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class rope : MonoBehaviour {
+public class rope : MonoBehaviour
+{
+    public GameObject my_light;
 
-    // Use this for initialization
-    public GameObject light;
-	void Start () {
+	void Start()
+    {
         GetComponent<CharacterJoint>().connectedBody = transform.parent.GetComponent<Rigidbody>();
         
-         GameObject k = Instantiate(light, transform.position, transform.rotation);
+        GameObject k = Instantiate(my_light, transform.position, transform.rotation);
         k.transform.parent = transform;
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
