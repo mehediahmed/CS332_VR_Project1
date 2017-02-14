@@ -11,6 +11,8 @@ public class RopeGun : VRTK_InteractableObject
     public LayerMask targetLayer;
     public Rope_Tube rope;
     public bool isTargetSet = false;
+    // Reference to the marker object.
+    public GameObject marker;
 
     private Vector3 pos;
     private Vector3 pos2;
@@ -84,7 +86,7 @@ public class RopeGun : VRTK_InteractableObject
                 //  origin = hit.rigidbody.gameObject;
                 Debug.DrawRay(bullet.transform.position, -transform.forward);
 
-
+                Instantiate(marker, pos, Quaternion.identity);
             }
 
         }
@@ -97,7 +99,7 @@ public class RopeGun : VRTK_InteractableObject
     {
         if (!haveTarget)
         {
-            origin = Instantiate(new GameObject(), pos, new Quaternion(0, 0, 0, 0));
+            origin = Instantiate(new GameObject(), pos, Quaternion.identity);
             origin.AddComponent<Rope_Tube>();
             origin.AddComponent<SphereCollider>();
             origin.GetComponent<Rigidbody>().useGravity = false;
@@ -111,7 +113,7 @@ public class RopeGun : VRTK_InteractableObject
         }
         else
         {
-            target = Instantiate(new GameObject(), pos, new Quaternion(0, 0, 0, 0));
+            target = Instantiate(new GameObject(), pos, Quaternion.identity);
             target.AddComponent<SphereCollider>();
 
             origin.GetComponent<Rope_Tube>().target = target.transform;

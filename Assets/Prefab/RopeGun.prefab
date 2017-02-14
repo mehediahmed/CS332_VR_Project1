@@ -150,7 +150,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1484694121372916}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 26.697245, y: 4.929, z: 79.58435}
+  m_LocalPosition: {x: 25.902885, y: 5.668, z: 79.47}
   m_LocalScale: {x: 2.1819391, y: 2.18194, z: 2.18194}
   m_Children:
   - {fileID: 4324598555370340}
@@ -458,6 +458,7 @@ MonoBehaviour:
     m_Bits: 256
   rope: {fileID: 0}
   isTargetSet: 0
+  marker: {fileID: 1403956801928974, guid: 52a4127c2d0678c42a4fd8230663c6e9, type: 2}
 --- !u!114 &114864650600561020
 MonoBehaviour:
   m_ObjectHideFlags: 1
