@@ -20,7 +20,7 @@ public class RopeCylinder : MonoBehaviour
         transform.position = pos1 + difference * 0.5f;
         // Scale the cylinder.
         Vector3 newScale = transform.localScale;
-        newScale.y = difference.magnitude;
+        newScale.y = difference.magnitude * 0.5f;
         transform.localScale = newScale;
         // Rotate the cylinder.
         transform.rotation = Quaternion.FromToRotation(Vector3.up, difference);

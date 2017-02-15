@@ -20,13 +20,14 @@ public class RopeGun : VRTK_InteractableObject
     
     // Position of the raycast hit.
     private Vector3 pos;
+    // The direction in which the gun will fire.
+    private Vector3 fireDirection;
+
     // The following variables are static to ensure that one rope is shared between all rope guns.
     private static bool isTargetSet = false;
     private static GameObject origin;
     private static GameObject target;
     private static GameObject rope;
-    // The direction in which the gun will fire.
-    private static Vector3 fireDirection;
 
 
 
