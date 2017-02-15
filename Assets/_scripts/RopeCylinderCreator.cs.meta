@@ -1,10 +1,14 @@
 fileFormatVersion: 2
 guid: 85047a2cac78051498c957409d0157ba
-timeCreated: 1487114744
+timeCreated: 1487181057
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - origin: {instanceID: 0}
+  - target: {instanceID: 0}
+  - ropePrefab: {fileID: 1559836002716310, guid: 3def3a4278e764145aa036aee7bbfc28,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

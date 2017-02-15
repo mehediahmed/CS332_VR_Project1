@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemyGlobalSpawner : MonoBehaviour
 {
     // Reference to the player object.
     public GameObject playerObject;
