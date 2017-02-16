@@ -9,11 +9,11 @@ using UnityEngine.AI;
 [RequireComponent (typeof (NavMeshAgent))]
 public class ShadowEnemy_Movement : MonoBehaviour
 {
-    // Reference to the player object.
-    public GameObject playerObject;
     // The distance away from the player at which the enemy will despawn.
     public float despawnDistance;
 
+    // Reference to the player object.
+    private GameObject playerObject;
     // Reference to the NavMeshAgent component.
     private NavMeshAgent agent;
 
@@ -33,5 +33,10 @@ public class ShadowEnemy_Movement : MonoBehaviour
             // Disable (despawn) the enemy.
             gameObject.SetActive(false);
         }
+    }
+
+    public void SetPlayerObject(GameObject obj)
+    {
+        playerObject = obj;
     }
 }

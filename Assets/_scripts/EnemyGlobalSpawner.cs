@@ -15,8 +15,6 @@ public class EnemyGlobalSpawner : MonoBehaviour
 {
     // Reference to the player object.
     public GameObject playerObject;
-    // Reference to the enemy to spawn.
-    public GameObject enemyObject;
     // The maximum number of shadow enemies that can be enabled at once.
     public int maxNumberOfEnemies;
     // The distance away from the player at which the enemy will spawn.
@@ -53,8 +51,8 @@ public class EnemyGlobalSpawner : MonoBehaviour
         camrotx2 *= Mathf.Deg2Rad;
         Vector3 camrotxvec1 = new Vector3(Mathf.Sin(camrotx1), 0.0f, Mathf.Cos(camrotx1));
         Vector3 camrotxvec2 = new Vector3(Mathf.Sin(camrotx2), 0.0f, Mathf.Cos(camrotx2));
-        camrotxvec1 *= 100;
-        camrotxvec2 *= 100;
+        camrotxvec1 *= 100f;
+        camrotxvec2 *= 100f;
         Vector3 campos = Camera.main.transform.position;
         Debug.DrawRay(campos, camrotxvec1, Color.red);
         Debug.DrawRay(campos, camrotxvec2, Color.red);
@@ -85,11 +83,11 @@ public class EnemyGlobalSpawner : MonoBehaviour
         {
             // Calculate a random direction to spawn the enemy in.
             // This calculation makes sure the enemy spawns outside of the camera view.
-            float direction = Random.Range(CameraView.lowerBound, CameraView.upperBound);
+            float direction = Random.Range(CameraView.outsideLowerBound, CameraView.outsideUpperBound);
             // Get all of the anti-shadow light components in the scene.
             Light_WardOffEnemies[] woes = (Light_WardOffEnemies[])FindObjectsOfType(typeof(Light_WardOffEnemies));
             // Enter the jaws of darkness: a big loop!
-            while (direction < CameraView.upperBound)
+            while (direction < CameraView.outsideUpperBound)
             {
                 // Convert the direction from degrees to radians for use in trig functions.
                 direction *= Mathf.Deg2Rad;
@@ -130,6 +128,7 @@ public class EnemyGlobalSpawner : MonoBehaviour
                         enemy.transform.position = desiredPosition;
                         // Activate the enemy.
                         enemy.GetComponent<NavMeshAgent>().enabled = true;
+                        enemy.GetComponent<ShadowEnemy_Movement>().SetPlayerObject(playerObject);
                         enemy.SetActive(true);
                         // Return the reference to this enemy.
                         return enemy;

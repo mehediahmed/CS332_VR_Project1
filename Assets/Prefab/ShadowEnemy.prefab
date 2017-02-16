@@ -93,6 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14794b181392b1a4e9a83c789f0f24fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  despawnDistance: 30
 --- !u!136 &136063861415032126
 CapsuleCollider:
   m_ObjectHideFlags: 1
