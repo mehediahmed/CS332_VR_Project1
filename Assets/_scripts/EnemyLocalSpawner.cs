@@ -3,9 +3,10 @@
 // All child GameObjects of this component's GameObject in the hierarchy will be used as shadow monster spawn points.
 
 // Comment out the following line to disable various debug items.
-#define SHOW_SPAWN_VECTORS
+//#define SHOW_SPAWN_VECTORS
 
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -19,13 +20,16 @@ public class EnemyLocalSpawner : MonoBehaviour
     public float timeBeforeFirstSpawn = 1.0f;
     // The number of seconds between each enemy spawn.
     public float timeBetweenSpawns = 3.0f;
+    // The minimum distance away from the spawner the player must be before the enemy can spawn.
+    public float spawnDistance = 10.0f;
 
-    private Transform[] spawnLocations;
+    private List<Vector3> spawnLocations = new List<Vector3>();
     private ObjectPool pool;
     private int numberOfSpawnLocations;
 
 #if SHOW_SPAWN_VECTORS
     private float debugDirection = 0.0f;
+    private Vector3 debugPosition = new Vector3(0f, 0f, 0f);
 #endif
 
     private void Awake()
@@ -37,9 +41,19 @@ public class EnemyLocalSpawner : MonoBehaviour
     {
         // Populate the enemy pool.
         pool.Populate(maxNumberOfEnemies);
-        // Get the spawn locations and take note of how many there are.
-        spawnLocations = GetComponentsInChildren<Transform>();
-        numberOfSpawnLocations = spawnLocations.Length;
+        // Get the spawn locations.
+        // The following code makes sure that only the children game objects are counted.
+        Transform[] spawnLocationsArray = GetComponentsInChildren<Transform>();
+        foreach (Transform comp in spawnLocationsArray)
+        {
+            if (comp.gameObject.GetInstanceID() != gameObject.GetInstanceID())
+            {
+                spawnLocations.Add(comp.position);
+            }
+        }
+        // Get the number of spawn locations.
+        numberOfSpawnLocations = spawnLocations.Count;
+        //Debug.Log("Spawn location count: " + numberOfSpawnLocations);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -48,7 +62,7 @@ public class EnemyLocalSpawner : MonoBehaviour
         // If the player enters the trigger region...
         if (other.name == "VRTK_HeadsetColliderContainer")
         {
-            Debug.Log("OMG!!!!!!! KICK THE PLAYER'S ASS");
+            //Debug.Log("OMG!!!!!!! KICK THE PLAYER'S ASS");
             StartCoroutine(SpawnEnemies());
         }
     }
@@ -57,32 +71,38 @@ public class EnemyLocalSpawner : MonoBehaviour
     {
         if (other.name == "VRTK_HeadsetColliderContainer")
         {
-            Debug.Log("That's enough.");
-            StopCoroutine(SpawnEnemies());
+            //Debug.Log("That's enough.");
+            //StopCoroutine(SpawnEnemies());
+            StopAllCoroutines();
+            pool.UnbookAllDeactivatedObjects();
         }
     }
 
     IEnumerator SpawnEnemies()
     {
         yield return new WaitForSeconds(timeBeforeFirstSpawn);
-        GameObject enemy;
-        if (pool.BookObject(out enemy))
+        // Loop until the coroutine is stopped.
+        while (true)
         {
-            // Choose a spawn point randomly.
-            int randomLocation = Random.Range(0, numberOfSpawnLocations);
-            // Use this spawn point in the coroutine.
-            StartCoroutine(SpawnEnemy(enemy, randomLocation));
+            GameObject enemy;
+            if (pool.BookObject(out enemy))
+            {
+                // Choose a spawn point randomly.
+                int randomLocation = Random.Range(0, numberOfSpawnLocations);
+                // Use this spawn point in the coroutine.
+                StartCoroutine(SpawnEnemy(enemy, randomLocation));
+            }
+            yield return new WaitForSeconds(timeBetweenSpawns);
         }
-        yield return new WaitForSeconds(timeBetweenSpawns);
     }
 
     IEnumerator SpawnEnemy(GameObject enemy, int randomLocation)
     {
-        Debug.Log("SpawnEnemy");
+        //Debug.Log("SpawnEnemy");
         // The loop will become exitable when this variable becomes false.
         bool needsToSpawn = true;
         // Get the spawn position.
-        Vector3 spawnPosition = spawnLocations[randomLocation].position;
+        Vector3 spawnPosition = spawnLocations[randomLocation];
         // Let's enter loop purgatory!
         while (needsToSpawn)
         {
@@ -90,22 +110,21 @@ public class EnemyLocalSpawner : MonoBehaviour
             // Calculate the angle between the camera and the spawn point.
             float z_component = spawnPosition.z - Camera.main.transform.position.z;
             float x_component = spawnPosition.x - Camera.main.transform.position.x;
+            // Atan2 returns degree values within the -180 to 180 range.
             float direction = Mathf.Atan2(x_component, z_component) * Mathf.Rad2Deg;
-            direction += 180f;
 #if SHOW_SPAWN_VECTORS
             debugDirection = direction;
-            Debug.Log("lowerBound: " + CameraView.insideLowerBound + ", direction:"
-                + direction + ",\nupperBound: " + CameraView.insideUpperBound
-                + ",eulerAngle: " + Camera.main.transform.eulerAngles.y);
+            debugPosition = spawnPosition;
 #endif
             // If the angle is outside the camera view...
-            if (CameraView.insideLowerBound > direction || direction > CameraView.insideUpperBound)
+            if (!CameraView.DegreeAngleN180180IsInFOV(direction))
             {
-                Debug.Log("Outside of view indeed, my friend!");
+                //Debug.Log("Outside of view indeed, my friend!");
                 // Attempt to move the agent to the NavMesh.
                 NavMeshHit hit;
                 if (NavMesh.SamplePosition(spawnPosition, out hit, 4f, NavMesh.AllAreas))
                 {
+                    //Debug.Log("NavMeshHit successful!");
                     Vector3 desiredPosition = hit.position;
                     // Check that each light is sufficiently far away from the desired enemy spawn point.
                     bool ok = true;
@@ -118,6 +137,11 @@ public class EnemyLocalSpawner : MonoBehaviour
                             ok = false;
                             break;
                         }
+                    }
+                    // Also check that the player is sufficiently far away from the desired enemy spawn point.
+                    if (Vector3.Distance(desiredPosition, playerObject.transform.position) < spawnDistance)
+                    {
+                        ok = false;
                     }
                     if (ok)
                     {
@@ -159,6 +183,11 @@ public class EnemyLocalSpawner : MonoBehaviour
                 Gizmos.DrawWireSphere(trans.position, 0.2f);
             }
         }
+
+#if SHOW_SPAWN_VECTORS
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawCube(debugPosition, new Vector3(1f, 1f, 1f));
+#endif
     }
 
 #if SHOW_SPAWN_VECTORS

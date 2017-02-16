@@ -70,4 +70,25 @@ public class ObjectPool : MonoBehaviour
     {
         booked[indexWithinPool] = false;
     }
+
+    // Unbook all objects in the pool.
+    public void UnbookAllObjects()
+    {
+        for (int i = 0; i < maxObjectCount; ++i)
+        {
+            booked[i] = false;
+        }
+    }
+
+    // Unbook all deactivated objects in the pool.
+    public void UnbookAllDeactivatedObjects()
+    {
+        for (int i = 0; i < maxObjectCount; ++i)
+        {
+            if (objects[i].activeInHierarchy == false)
+            {
+                booked[i] = false;
+            }
+        }
+    }
 }

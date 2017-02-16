@@ -82,4 +82,17 @@ static class CameraView
         Debug.DrawRay(campos, camrotxvec1, Color.red);
         Debug.DrawRay(campos, camrotxvec2, Color.red);
     }
+
+    // Converts an angle to the -180 to 180 degree range.
+    public static float DegreeAngleToRangeN180180(float angle)
+    {
+        return ((angle + 180f + 360f) % 360f - 180f);
+    }
+    
+    // Returns true if the angle is within the field of view.
+    public static bool DegreeAngleN180180IsInFOV(float angle)
+    {
+        float anglediff = DegreeAngleToRangeN180180(Camera.main.transform.eulerAngles.y - angle);
+        return (anglediff <= halffov && anglediff >= -halffov);
+    }
 }

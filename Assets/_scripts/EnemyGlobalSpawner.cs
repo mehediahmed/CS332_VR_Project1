@@ -83,6 +83,8 @@ public class EnemyGlobalSpawner : MonoBehaviour
         {
             // Calculate a random direction to spawn the enemy in.
             // This calculation makes sure the enemy spawns outside of the camera view.
+            //float lowerBound = CameraView.DegreeAngleToRangeN180180(CameraView.outsideLowerBound);
+            //float upperBound = CameraView.DegreeAngleToRangeN180180(CameraView.outsideUpperBound);
             float direction = Random.Range(CameraView.outsideLowerBound, CameraView.outsideUpperBound);
             // Get all of the anti-shadow light components in the scene.
             Light_WardOffEnemies[] woes = (Light_WardOffEnemies[])FindObjectsOfType(typeof(Light_WardOffEnemies));
