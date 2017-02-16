@@ -1,8 +1,8 @@
 ﻿// Author(s): Paul Calande
-// Spawner object for shadow enemies. Functions on a global scale throughout the scene.
+// Global spawner class for shadow enemies. Functions on a global scale throughout the scene.
 
 // Comment out the following line to disable the debug camera rays.
-#define SHOW_CAMERA_FIELD
+//#define SHOW_CAMERA_FIELD
 // Comment out the following line to disable spawning milestone debug logs.
 //#define LOG_SPAWNING_MILESTONES
 
@@ -21,17 +21,11 @@ public class EnemyGlobalSpawner : MonoBehaviour
     public int maxNumberOfEnemies;
     // The distance away from the player at which the enemy will spawn.
     public float spawnDistance;
-    // The distance away from the player at which the enemy will despawn.
-    public float despawnDistance;
     // The time between each attempted enemy spawn, measured in seconds.
     public float timeBetweenEnemySpawns;
 
-    // Use object pooling to store the enemies.
-    private List<GameObject> enemies = new List<GameObject>();
-    // A parallel pool for storing the NavMeshAgent components.
-    private List<NavMeshAgent> agents = new List<NavMeshAgent>();
-    // The main camera's horizontal field of view divided by 2. To be used for calculations.
-    private float halffov;
+    // Reference to the enemy object pool.
+    private ObjectPool pool;
 
 #if SHOW_CAMERA_FIELD
     // Debug vector for showing the direction from which enemies spawn.
@@ -40,31 +34,17 @@ public class EnemyGlobalSpawner : MonoBehaviour
 
     private void Start()
     {
-        // Add the enemies to the object pool.
-        for (int i=0; i<maxNumberOfEnemies; ++i)
-        {
-            GameObject enemy = Instantiate(enemyObject);
-            ShadowEnemy_Movement component = enemy.GetComponent<ShadowEnemy_Movement>();
-            component.SetPlayerObject(playerObject);
-            component.SetDespawnDistance(despawnDistance);
-            enemy.SetActive(false);
-            enemies.Add(enemy);
-            agents.Add(enemy.GetComponent<NavMeshAgent>());
-        }
-        // Calculate the main camera's horizontal field of view.
-        float verticalfov = Camera.main.fieldOfView * Mathf.Deg2Rad;
-        float horizontalfov = 2 * Mathf.Atan(Mathf.Tan(verticalfov / 2) * Camera.main.aspect);
-        // Convert to degrees and divide by 2 for use in calculations.
-        halffov = horizontalfov * Mathf.Rad2Deg * 0.5f;
-        // Add a few extra degrees to prevent enemies from spawning directly on the edge of the camera's vision.
-        halffov += 10f;
+        // Get and populate the enemy pool.
+        pool = GetComponent<ObjectPool>();
+        pool.Populate(maxNumberOfEnemies);
         // Start the timer-based enemy spawning coroutine.
-        StartCoroutine("SpawnTimer");
+        StartCoroutine(SpawnTimer());
     }
+
+#if SHOW_CAMERA_FIELD
 
     private void Update()
     {
-#if SHOW_CAMERA_FIELD
         // Debug stuff for showing the camera's field of view.
         float camrotx = Camera.main.transform.eulerAngles.y;
         float camrotx1 = camrotx + halffov;
@@ -79,8 +59,9 @@ public class EnemyGlobalSpawner : MonoBehaviour
         Debug.DrawRay(campos, camrotxvec1, Color.red);
         Debug.DrawRay(campos, camrotxvec2, Color.red);
         Debug.DrawRay(campos, spawnline, Color.blue);
-#endif
     }
+
+#endif
 
     // Repeated spawning coroutine.
     IEnumerator SpawnTimer()
@@ -97,41 +78,18 @@ public class EnemyGlobalSpawner : MonoBehaviour
     // Spawn an enemy.
     public GameObject SpawnEnemy()
     {
-        GameObject enemy = null;
-        NavMeshAgent agent = null;
-        // Try to find an inactive enemy in the pool.
-        for (int i=0; i<maxNumberOfEnemies; ++i)
-        {
-            // If we've found an inactive enemy...
-            if (enemies[i].activeInHierarchy == false)
-            {
-                // Keep a reference to the found enemy and its NavMeshAgent component.
-                enemy = enemies[i];
-                agent = agents[i];
-                // End the loop prematurely.
-                break;
-            }
-        }
-        // If we didn't find an inactive enemy, the pool is currently exhausted.
-        // Hence, we can't spawn any more enemies at this time, so we exit this function.
-        if (enemy == null)
-        {
-            return null;
-        }
-        // Otherwise, we get the enemy ready and activate it.
-        else
+        // Attempt to get an enemy from the pool.
+        GameObject enemy;
+        // If we found an enemy...
+        if (pool.BookObject(out enemy))
         {
             // Calculate a random direction to spawn the enemy in.
             // This calculation makes sure the enemy spawns outside of the camera view.
-            float camrot = Camera.main.transform.eulerAngles.y;
-            float lowerBound = camrot + halffov;
-            float upperBound = camrot + 360f - halffov;
-            //Debug.Log("lowerBound/upperBound: " + lowerBound + "/" + upperBound);
-            float direction = Random.Range(lowerBound, upperBound);
+            float direction = Random.Range(CameraView.lowerBound, CameraView.upperBound);
             // Get all of the anti-shadow light components in the scene.
             Light_WardOffEnemies[] woes = (Light_WardOffEnemies[])FindObjectsOfType(typeof(Light_WardOffEnemies));
             // Enter the jaws of darkness: a big loop!
-            while (direction < upperBound)
+            while (direction < CameraView.upperBound)
             {
                 // Convert the direction from degrees to radians for use in trig functions.
                 direction *= Mathf.Deg2Rad;
@@ -168,14 +126,10 @@ public class EnemyGlobalSpawner : MonoBehaviour
 #if LOG_SPAWNING_MILESTONES
                         Debug.Log("Light_WardOffEnemies check satisfied.");
 #endif
-                        // Move the enemy to the position.
-                        // Since it's a navmesh agent, we need to disable its agent component briefly.
-                        // Otherwise, it will revert back to its old position.
-                        //agent.enabled = false;
                         // Move the enemy.
                         enemy.transform.position = desiredPosition;
                         // Activate the enemy.
-                        agent.enabled = true;
+                        enemy.GetComponent<NavMeshAgent>().enabled = true;
                         enemy.SetActive(true);
                         // Return the reference to this enemy.
                         return enemy;
@@ -187,11 +141,14 @@ public class EnemyGlobalSpawner : MonoBehaviour
                 direction *= Mathf.Rad2Deg;
                 direction += 4f;
             }
-            // Failed to spawn an agent.
+        }
+
+        // At this point, we have ultimately failed to spawn an agent.
+
 #if SHOW_CAMERA_FIELD
             spawnline = new Vector3(0f, 0f, 0f);
 #endif
-            return null;
-        }
+
+        return null;
     }
 }
