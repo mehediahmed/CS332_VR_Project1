@@ -9,6 +9,7 @@ public class EnemySound : MonoBehaviour
     private void Awake()
     {
         myAudio = GetComponent<AudioSource>();
+        //This is a comment
         myAudio.Play();
     }
 
