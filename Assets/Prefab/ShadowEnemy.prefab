@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114716998451025494}
   - component: {fileID: 195068115147640898}
   - component: {fileID: 82781787392398322}
+  - component: {fileID: 114422918595418178}
   m_Layer: 0
   m_Name: ShadowEnemy
   m_TagString: Untagged
@@ -93,19 +94,19 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b30f17112374edc4783759f485710233, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 50
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -150,7 +151,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -163,6 +164,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114422918595418178
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1637309201625868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d55ba1ef99fd2be4ab5d8dd83cd927ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundDistance: 50
+  playerObject: {fileID: 146900, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
 --- !u!114 &114716998451025494
 MonoBehaviour:
   m_ObjectHideFlags: 1
