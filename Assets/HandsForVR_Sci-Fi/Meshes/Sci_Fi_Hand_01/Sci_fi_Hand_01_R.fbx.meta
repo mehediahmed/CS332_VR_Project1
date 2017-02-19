@@ -1,0 +1,480 @@
+fileFormatVersion: 2
+guid: 40b62ee8c9741de45b5b9c3676869d21
+timeCreated: 1481629063
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Armature_001
+    100002: female.high.r
+    100004: female.high.r.001
+    100006: glove_detail_led
+    100008: hand.r
+    100010: hand.r 1
+    100012: index.r
+    100014: index.r 1
+    100016: index.r.001
+    100018: index.r.001 1
+    100020: index.r.002
+    100022: index.r.002 1
+    100024: index.r.002_end
+    100026: index.r.002_end 1
+    100028: index.r.002_end_end
+    100030: middle.r
+    100032: middle.r 1
+    100034: middle.r.001
+    100036: middle.r.001 1
+    100038: middle.r.002
+    100040: middle.r.002 1
+    100042: middle.r.002_end
+    100044: middle.r.002_end 1
+    100046: middle.r.002_end_end
+    100048: palm.r
+    100050: palm.r 1
+    100052: pinky.r
+    100054: pinky.r 1
+    100056: pinky.r.001
+    100058: pinky.r.001 1
+    100060: pinky.r.002
+    100062: pinky.r.002 1
+    100064: pinky.r.002_end
+    100066: pinky.r.002_end 1
+    100068: pinky.r.002_end_end
+    100070: pinky.r.002_end_end 1
+    100072: pinky.r.002_end_end_end
+    100074: ring.r
+    100076: ring.r 1
+    100078: ring.r.001
+    100080: ring.r.001 1
+    100082: ring.r.002
+    100084: ring.r.002 1
+    100086: ring.r.002_end
+    100088: ring.r.002_end 1
+    100090: ring.r.002_end_end
+    100092: //RootNode
+    100094: thumb.r
+    100096: thumb.r 1
+    100098: thumb.r.001
+    100100: thumb.r.001 1
+    100102: thumb.r.002
+    100104: thumb.r.002 1
+    100106: thumb.r.002_end
+    100108: thumb.r.002_end 1
+    100110: thumb.r.002_end_end
+    400000: Armature_001
+    400002: female.high.r
+    400004: female.high.r.001
+    400006: glove_detail_led
+    400008: hand.r
+    400010: hand.r 1
+    400012: index.r
+    400014: index.r 1
+    400016: index.r.001
+    400018: index.r.001 1
+    400020: index.r.002
+    400022: index.r.002 1
+    400024: index.r.002_end
+    400026: index.r.002_end 1
+    400028: index.r.002_end_end
+    400030: middle.r
+    400032: middle.r 1
+    400034: middle.r.001
+    400036: middle.r.001 1
+    400038: middle.r.002
+    400040: middle.r.002 1
+    400042: middle.r.002_end
+    400044: middle.r.002_end 1
+    400046: middle.r.002_end_end
+    400048: palm.r
+    400050: palm.r 1
+    400052: pinky.r
+    400054: pinky.r 1
+    400056: pinky.r.001
+    400058: pinky.r.001 1
+    400060: pinky.r.002
+    400062: pinky.r.002 1
+    400064: pinky.r.002_end
+    400066: pinky.r.002_end 1
+    400068: pinky.r.002_end_end
+    400070: pinky.r.002_end_end 1
+    400072: pinky.r.002_end_end_end
+    400074: ring.r
+    400076: ring.r 1
+    400078: ring.r.001
+    400080: ring.r.001 1
+    400082: ring.r.002
+    400084: ring.r.002 1
+    400086: ring.r.002_end
+    400088: ring.r.002_end 1
+    400090: ring.r.002_end_end
+    400092: //RootNode
+    400094: thumb.r
+    400096: thumb.r 1
+    400098: thumb.r.001
+    400100: thumb.r.001 1
+    400102: thumb.r.002
+    400104: thumb.r.002 1
+    400106: thumb.r.002_end
+    400108: thumb.r.002_end 1
+    400110: thumb.r.002_end_end
+    4300000: glove_detail_led
+    7400000: Glove1_Grab_Anim_R
+    7400002: Glove1_Idle_Anim_R
+    9500000: //RootNode
+    13700000: glove_detail_led
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Glove1_Grab_Anim_R
+      takeName: Scene
+      firstFrame: 0
+      lastFrame: 15
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature_001
+        weight: 1
+      - path: female.high.r
+        weight: 1
+      - path: female.high.r/hand.r
+        weight: 1
+      - path: female.high.r/hand.r/index.r 1
+        weight: 1
+      - path: female.high.r/hand.r/index.r 1/index.r.001 1
+        weight: 1
+      - path: female.high.r/hand.r/index.r 1/index.r.001 1/index.r.002 1
+        weight: 1
+      - path: female.high.r/hand.r/index.r 1/index.r.001 1/index.r.002 1/index.r.002_end
+          1
+        weight: 1
+      - path: female.high.r/hand.r/middle.r 1
+        weight: 1
+      - path: female.high.r/hand.r/middle.r 1/middle.r.001 1
+        weight: 1
+      - path: female.high.r/hand.r/middle.r 1/middle.r.001 1/middle.r.002 1
+        weight: 1
+      - path: female.high.r/hand.r/middle.r 1/middle.r.001 1/middle.r.002 1/middle.r.002_end
+          1
+        weight: 1
+      - path: female.high.r/hand.r/palm.r 1
+        weight: 1
+      - path: female.high.r/hand.r/palm.r 1/pinky.r 1
+        weight: 1
+      - path: female.high.r/hand.r/palm.r 1/pinky.r 1/pinky.r.001 1
+        weight: 1
+      - path: female.high.r/hand.r/palm.r 1/pinky.r 1/pinky.r.001 1/pinky.r.002 1
+        weight: 1
+      - path: female.high.r/hand.r/palm.r 1/pinky.r 1/pinky.r.001 1/pinky.r.002 1/pinky.r.002_end
+          1
+        weight: 1
+      - path: female.high.r/hand.r/palm.r 1/pinky.r 1/pinky.r.001 1/pinky.r.002 1/pinky.r.002_end
+          1/pinky.r.002_end_end 1
+        weight: 1
+      - path: female.high.r/hand.r/ring.r 1
+        weight: 1
+      - path: female.high.r/hand.r/ring.r 1/ring.r.001 1
+        weight: 1
+      - path: female.high.r/hand.r/ring.r 1/ring.r.001 1/ring.r.002 1
+        weight: 1
+      - path: female.high.r/hand.r/ring.r 1/ring.r.001 1/ring.r.002 1/ring.r.002_end
+          1
+        weight: 1
+      - path: female.high.r/hand.r/thumb.r 1
+        weight: 1
+      - path: female.high.r/hand.r/thumb.r 1/thumb.r.001 1
+        weight: 1
+      - path: female.high.r/hand.r/thumb.r 1/thumb.r.001 1/thumb.r.002 1
+        weight: 1
+      - path: female.high.r/hand.r/thumb.r 1/thumb.r.001 1/thumb.r.002 1/thumb.r.002_end
+          1
+        weight: 1
+      - path: female.high.r.001
+        weight: 1
+      - path: female.high.r.001/hand.r 1
+        weight: 1
+      - path: female.high.r.001/hand.r 1/index.r
+        weight: 1
+      - path: female.high.r.001/hand.r 1/index.r/index.r.001
+        weight: 1
+      - path: female.high.r.001/hand.r 1/index.r/index.r.001/index.r.002
+        weight: 1
+      - path: female.high.r.001/hand.r 1/index.r/index.r.001/index.r.002/index.r.002_end
+        weight: 1
+      - path: female.high.r.001/hand.r 1/index.r/index.r.001/index.r.002/index.r.002_end/index.r.002_end_end
+        weight: 1
+      - path: female.high.r.001/hand.r 1/middle.r
+        weight: 1
+      - path: female.high.r.001/hand.r 1/middle.r/middle.r.001
+        weight: 1
+      - path: female.high.r.001/hand.r 1/middle.r/middle.r.001/middle.r.002
+        weight: 1
+      - path: female.high.r.001/hand.r 1/middle.r/middle.r.001/middle.r.002/middle.r.002_end
+        weight: 1
+      - path: female.high.r.001/hand.r 1/middle.r/middle.r.001/middle.r.002/middle.r.002_end/middle.r.002_end_end
+        weight: 1
+      - path: female.high.r.001/hand.r 1/palm.r
+        weight: 1
+      - path: female.high.r.001/hand.r 1/palm.r/pinky.r
+        weight: 1
+      - path: female.high.r.001/hand.r 1/palm.r/pinky.r/pinky.r.001
+        weight: 1
+      - path: female.high.r.001/hand.r 1/palm.r/pinky.r/pinky.r.001/pinky.r.002
+        weight: 1
+      - path: female.high.r.001/hand.r 1/palm.r/pinky.r/pinky.r.001/pinky.r.002/pinky.r.002_end
+        weight: 1
+      - path: female.high.r.001/hand.r 1/palm.r/pinky.r/pinky.r.001/pinky.r.002/pinky.r.002_end/pinky.r.002_end_end
+        weight: 1
+      - path: female.high.r.001/hand.r 1/palm.r/pinky.r/pinky.r.001/pinky.r.002/pinky.r.002_end/pinky.r.002_end_end/pinky.r.002_end_end_end
+        weight: 1
+      - path: female.high.r.001/hand.r 1/ring.r
+        weight: 1
+      - path: female.high.r.001/hand.r 1/ring.r/ring.r.001
+        weight: 1
+      - path: female.high.r.001/hand.r 1/ring.r/ring.r.001/ring.r.002
+        weight: 1
+      - path: female.high.r.001/hand.r 1/ring.r/ring.r.001/ring.r.002/ring.r.002_end
+        weight: 1
+      - path: female.high.r.001/hand.r 1/ring.r/ring.r.001/ring.r.002/ring.r.002_end/ring.r.002_end_end
+        weight: 1
+      - path: female.high.r.001/hand.r 1/thumb.r
+        weight: 1
+      - path: female.high.r.001/hand.r 1/thumb.r/thumb.r.001
+        weight: 1
+      - path: female.high.r.001/hand.r 1/thumb.r/thumb.r.001/thumb.r.002
+        weight: 1
+      - path: female.high.r.001/hand.r 1/thumb.r/thumb.r.001/thumb.r.002/thumb.r.002_end
+        weight: 1
+      - path: female.high.r.001/hand.r 1/thumb.r/thumb.r.001/thumb.r.002/thumb.r.002_end/thumb.r.002_end_end
+        weight: 1
+      - path: glove_detail_led
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Glove1_Idle_Anim_R
+      takeName: Scene
+      firstFrame: 0
+      lastFrame: 2
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature_001
+        weight: 1
+      - path: female.high.r
+        weight: 1
+      - path: female.high.r/hand.r
+        weight: 1
+      - path: female.high.r/hand.r/index.r 1
+        weight: 1
+      - path: female.high.r/hand.r/index.r 1/index.r.001 1
+        weight: 1
+      - path: female.high.r/hand.r/index.r 1/index.r.001 1/index.r.002 1
+        weight: 1
+      - path: female.high.r/hand.r/index.r 1/index.r.001 1/index.r.002 1/index.r.002_end
+          1
+        weight: 1
+      - path: female.high.r/hand.r/middle.r 1
+        weight: 1
+      - path: female.high.r/hand.r/middle.r 1/middle.r.001 1
+        weight: 1
+      - path: female.high.r/hand.r/middle.r 1/middle.r.001 1/middle.r.002 1
+        weight: 1
+      - path: female.high.r/hand.r/middle.r 1/middle.r.001 1/middle.r.002 1/middle.r.002_end
+          1
+        weight: 1
+      - path: female.high.r/hand.r/palm.r 1
+        weight: 1
+      - path: female.high.r/hand.r/palm.r 1/pinky.r 1
+        weight: 1
+      - path: female.high.r/hand.r/palm.r 1/pinky.r 1/pinky.r.001 1
+        weight: 1
+      - path: female.high.r/hand.r/palm.r 1/pinky.r 1/pinky.r.001 1/pinky.r.002 1
+        weight: 1
+      - path: female.high.r/hand.r/palm.r 1/pinky.r 1/pinky.r.001 1/pinky.r.002 1/pinky.r.002_end
+          1
+        weight: 1
+      - path: female.high.r/hand.r/palm.r 1/pinky.r 1/pinky.r.001 1/pinky.r.002 1/pinky.r.002_end
+          1/pinky.r.002_end_end 1
+        weight: 1
+      - path: female.high.r/hand.r/ring.r 1
+        weight: 1
+      - path: female.high.r/hand.r/ring.r 1/ring.r.001 1
+        weight: 1
+      - path: female.high.r/hand.r/ring.r 1/ring.r.001 1/ring.r.002 1
+        weight: 1
+      - path: female.high.r/hand.r/ring.r 1/ring.r.001 1/ring.r.002 1/ring.r.002_end
+          1
+        weight: 1
+      - path: female.high.r/hand.r/thumb.r 1
+        weight: 1
+      - path: female.high.r/hand.r/thumb.r 1/thumb.r.001 1
+        weight: 1
+      - path: female.high.r/hand.r/thumb.r 1/thumb.r.001 1/thumb.r.002 1
+        weight: 1
+      - path: female.high.r/hand.r/thumb.r 1/thumb.r.001 1/thumb.r.002 1/thumb.r.002_end
+          1
+        weight: 1
+      - path: female.high.r.001
+        weight: 1
+      - path: female.high.r.001/hand.r 1
+        weight: 1
+      - path: female.high.r.001/hand.r 1/index.r
+        weight: 1
+      - path: female.high.r.001/hand.r 1/index.r/index.r.001
+        weight: 1
+      - path: female.high.r.001/hand.r 1/index.r/index.r.001/index.r.002
+        weight: 1
+      - path: female.high.r.001/hand.r 1/index.r/index.r.001/index.r.002/index.r.002_end
+        weight: 1
+      - path: female.high.r.001/hand.r 1/index.r/index.r.001/index.r.002/index.r.002_end/index.r.002_end_end
+        weight: 1
+      - path: female.high.r.001/hand.r 1/middle.r
+        weight: 1
+      - path: female.high.r.001/hand.r 1/middle.r/middle.r.001
+        weight: 1
+      - path: female.high.r.001/hand.r 1/middle.r/middle.r.001/middle.r.002
+        weight: 1
+      - path: female.high.r.001/hand.r 1/middle.r/middle.r.001/middle.r.002/middle.r.002_end
+        weight: 1
+      - path: female.high.r.001/hand.r 1/middle.r/middle.r.001/middle.r.002/middle.r.002_end/middle.r.002_end_end
+        weight: 1
+      - path: female.high.r.001/hand.r 1/palm.r
+        weight: 1
+      - path: female.high.r.001/hand.r 1/palm.r/pinky.r
+        weight: 1
+      - path: female.high.r.001/hand.r 1/palm.r/pinky.r/pinky.r.001
+        weight: 1
+      - path: female.high.r.001/hand.r 1/palm.r/pinky.r/pinky.r.001/pinky.r.002
+        weight: 1
+      - path: female.high.r.001/hand.r 1/palm.r/pinky.r/pinky.r.001/pinky.r.002/pinky.r.002_end
+        weight: 1
+      - path: female.high.r.001/hand.r 1/palm.r/pinky.r/pinky.r.001/pinky.r.002/pinky.r.002_end/pinky.r.002_end_end
+        weight: 1
+      - path: female.high.r.001/hand.r 1/palm.r/pinky.r/pinky.r.001/pinky.r.002/pinky.r.002_end/pinky.r.002_end_end/pinky.r.002_end_end_end
+        weight: 1
+      - path: female.high.r.001/hand.r 1/ring.r
+        weight: 1
+      - path: female.high.r.001/hand.r 1/ring.r/ring.r.001
+        weight: 1
+      - path: female.high.r.001/hand.r 1/ring.r/ring.r.001/ring.r.002
+        weight: 1
+      - path: female.high.r.001/hand.r 1/ring.r/ring.r.001/ring.r.002/ring.r.002_end
+        weight: 1
+      - path: female.high.r.001/hand.r 1/ring.r/ring.r.001/ring.r.002/ring.r.002_end/ring.r.002_end_end
+        weight: 1
+      - path: female.high.r.001/hand.r 1/thumb.r
+        weight: 1
+      - path: female.high.r.001/hand.r 1/thumb.r/thumb.r.001
+        weight: 1
+      - path: female.high.r.001/hand.r 1/thumb.r/thumb.r.001/thumb.r.002
+        weight: 1
+      - path: female.high.r.001/hand.r 1/thumb.r/thumb.r.001/thumb.r.002/thumb.r.002_end
+        weight: 1
+      - path: female.high.r.001/hand.r 1/thumb.r/thumb.r.001/thumb.r.002/thumb.r.002_end/thumb.r.002_end_end
+        weight: 1
+      - path: glove_detail_led
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 90
+    normalImportMode: 1
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
