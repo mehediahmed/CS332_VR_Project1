@@ -17,7 +17,12 @@ public class RopeGun : VRTK_InteractableObject
     public GameObject marker;
     // Reference to the rope prefab.
     public GameObject ropePrefab;
-    
+    //Sounds for shooting and hitting
+    public AudioClip shootSound;
+    public AudioClip hitSound;
+    //source of the sounds this gun will make
+    private AudioSource source;
+
     // Position of the raycast hit.
     private Vector3 pos;
     // The direction in which the gun will fire.
@@ -34,6 +39,7 @@ public class RopeGun : VRTK_InteractableObject
     protected override void Awake()
     {
         base.Awake();
+        source = GetComponent<AudioSource>();
     }
 
     public override void StartUsing(GameObject usingObject)
@@ -43,6 +49,7 @@ public class RopeGun : VRTK_InteractableObject
 #endif
         base.StartUsing(usingObject);
         Raycasting();
+        source.PlayOneShot(shootSound);
     }
 
     public override void Grabbed(GameObject currentGrabbingObject)
@@ -93,6 +100,7 @@ public class RopeGun : VRTK_InteractableObject
 #endif
                 pos = hit.point;
                 SpawnRope();
+                source.PlayOneShot(hitSound);
             }
         }
     }
