@@ -74,8 +74,6 @@
 
         private void Update()
         {
-            pointerFinger.localEulerAngles = new Vector3(targetPointerRotation, 0f, 0f);
-            gripFingers.localEulerAngles = new Vector3(targetGripRotation, 0f, 0f);
         }
     }
 }

@@ -354,7 +354,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1003050133616210}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93c5acf727c4d5d43bc69e892a516630, type: 3}
   m_Name: 
@@ -367,7 +367,7 @@ MonoBehaviour:
   m_MSAALevel: 4
   m_minRenderTargetScale: 0.8
   m_maxRenderTargetScale: 1.4
-  m_maxRenderTargetDimension: 4096
+  m_maxRenderTargetDimension: 1024
   m_cullLightsInSceneEditor: 0
   m_cullLightsFromEditorCamera: 0
   m_hideAllValveMaterials: 0
