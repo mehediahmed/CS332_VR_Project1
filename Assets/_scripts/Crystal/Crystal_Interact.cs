@@ -24,11 +24,19 @@ public class Crystal_Interact : VRTK_InteractableObject
 
     // Division is an expensive operation, so calculating this constant ahead of time will help performance. -Paul
     private float intensityFactor = 1f / 12.5f;
+    public AudioSource[] sounds;
+    public AudioSource crystalThrum;
+    public AudioSource activatedCrystal;
 
     void Start()
     {
         charges = maxCharges;
         ResetLight();
+        sounds = GetComponents<AudioSource>();
+        crystalThrum = sounds[0];
+        activatedCrystal = sounds[1];
+        crystalThrum.Play();
+        crystalThrum.loop = true;
     }
 
     protected override void Update()
@@ -53,10 +61,16 @@ public class Crystal_Interact : VRTK_InteractableObject
         if (isActive)
         {
             charges -= decayRate * Time.deltaTime;
+            if (activatedCrystal.isPlaying == false)
+            {
+                activatedCrystal.Play();
+                activatedCrystal.loop = true;
+            }
         }
         if (!isActive)
         {
             charges += RechargeRate * Time.deltaTime;
+            activatedCrystal.Stop();
         }
     }
 
