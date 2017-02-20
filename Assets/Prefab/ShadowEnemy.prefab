@@ -25,11 +25,11 @@ GameObject:
   - component: {fileID: 114716998451025494}
   - component: {fileID: 195068115147640898}
   - component: {fileID: 82781787392398322}
+  - component: {fileID: 82384820095380962}
   - component: {fileID: 114422918595418178}
-  - component: {fileID: 82014523335749902}
   m_Layer: 0
   m_Name: ShadowEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,7 +85,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1637309201625868}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!82 &82014523335749902
+--- !u!82 &82384820095380962
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -94,9 +94,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d27ccca31ee7a4a4097eaac79b37887c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b30f17112374edc4783759f485710233, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.494
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -105,7 +105,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 5
+  MaxDistance: 20
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -174,7 +174,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b30f17112374edc4783759f485710233, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d27ccca31ee7a4a4097eaac79b37887c, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.494
   m_Pitch: 1
@@ -257,6 +257,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundDistance: 10
+  feedingSound: {fileID: 8300000, guid: d27ccca31ee7a4a4097eaac79b37887c, type: 3}
+  movingSound: {fileID: 8300000, guid: b30f17112374edc4783759f485710233, type: 3}
 --- !u!114 &114716998451025494
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -290,7 +292,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1637309201625868}
   m_Enabled: 0
   m_Radius: 0.5
-  m_Speed: 1
+  m_Speed: 0.2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

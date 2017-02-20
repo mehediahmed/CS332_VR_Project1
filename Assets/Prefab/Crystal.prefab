@@ -543,11 +543,13 @@ MonoBehaviour:
   PassiveLight: {fileID: 108356740839091636}
   decayRate: 20
   RechargeRate: 5
-  maxCharges: 100
+  maxCharges: 1
   minimumThreshold: 1
   sounds: []
   crystalThrum: {fileID: 82143914222423508}
   activatedCrystal: {fileID: 82542805124135220}
+  enemyFeedingRadius: 1
+  enemyFeedingRate: 6
 --- !u!114 &114794135278484810
 MonoBehaviour:
   m_ObjectHideFlags: 1

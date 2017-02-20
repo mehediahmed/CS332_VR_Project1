@@ -25,15 +25,28 @@ public class Light_WardOffEnemies : MonoBehaviour
         // Capsules are circular, just like the light emitted by point lights.
         // Hence, capsules are better for us than boxes in this case.
         obstacle.shape = NavMeshObstacleShape.Capsule;
-        // Make the obstacle the same radius as the light.
-        obstacle.radius = lightComponent.range;
+        UpdateObstacleRadius();
     }
 
     private void Update()
     {
         // Update the obstacle radius every step.
         // This is useful for lights that change size over time.
-        obstacle.radius = lightComponent.range;
+        UpdateObstacleRadius();
+    }
+
+    public void UpdateObstacleRadius()
+    {
+        // Set the obstacle radius to 0 if the light has no intensity.
+        if (lightComponent.intensity == 0)
+        {
+            obstacle.radius = 0;
+        }
+        else
+        {
+            // Make the obstacle the same radius as the light.
+            obstacle.radius = lightComponent.range;
+        }
     }
 
     public float GetRadius()

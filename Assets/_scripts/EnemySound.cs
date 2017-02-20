@@ -1,4 +1,4 @@
-﻿// Author(s): Josiah Erikson
+﻿// Author(s): Josiah Erikson, Paul Calande
 // Enemy sound script
 using System.Collections;
 using System.Collections.Generic;
@@ -6,51 +6,79 @@ using UnityEngine;
 
 public class EnemySound : MonoBehaviour
 {
-    private AudioSource myAudio;
+    // How close the enemy must be to the player for the sound to play.
     public int soundDistance;
+
+    private AudioSource[] myAudio;
+    private AudioSource feedingSound;
+    private AudioSource movingSound;
     // Reference to the player object.
     private GameObject player;
+    // Whether the enemy is feeding on light. This determines which sound to play.
+    private bool isFeeding = false;
 
-    private void Awake()
+    private void Start()
     {
-        myAudio = GetComponent<AudioSource>();
+        myAudio = GetComponents<AudioSource>();
+        feedingSound = myAudio[0];
+        movingSound = myAudio[1];
         player = GetComponent<ShadowEnemy_Movement>().GetPlayerObject();
-        Vector3 playerpos = player.transform.position;
-        //Debug.Log("Playerpos is " + playerpos);
-        //Debug.Log("Transform position is " + transform.position);
-        //Debug.Log("SoundDistance is " + soundDistance);
-        //Debug.Log("Distance between them is " + Vector3.Distance(playerpos, transform.position)); 
-        // If the enemy is too far away from the player, stop playing audio
-        if (Vector3.Distance(playerpos, transform.position) > soundDistance)
+
+        StartCoroutine(PeriodicAudioCheck());
+    }
+
+    // Calls DoAudio frequently but not every frame since a calculation in Update is unnecessary.
+    IEnumerator PeriodicAudioCheck()
+    {
+        while (true)
         {
-          //  Debug.Log("Player is too far away to play sound");
-            myAudio.Stop();
+            DoAudio();
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
-    private void Update()
+    public void DoAudio()
     {
         Vector3 playerpos = player.transform.position;
-        // If the enemy is too far away from the player, stop playing audio
         float playerDistance = Vector3.Distance(playerpos, transform.position);
         //Debug.Log("Playerpos is " + playerpos);
         //Debug.Log("Transform position is " + transform.position);
         //Debug.Log("SoundDistance is " + soundDistance);
         //Debug.Log("Distance between them is " + playerDistance);
+        // If the enemy is too far away from the player, stop playing audio
         if (playerDistance > soundDistance)
         {
             //Debug.Log("Player is too far away to play sound");
-            myAudio.Stop();
+            movingSound.Stop();
+            feedingSound.Stop();
         }
-        else
         //Otherwise, if it's not playing, start playing it
+        else
         {
-           // Debug.Log("Player is within range for playing sound");
-            if (myAudio.isPlaying == false)
+            // Debug.Log("Player is within range for playing sound");
+            if (isFeeding)
             {
-                myAudio.Play();
-                myAudio.loop = true;
+                if (feedingSound.isPlaying == false)
+                {
+                    movingSound.Stop();
+                    feedingSound.Play();
+                    feedingSound.loop = true;
+                }
+            }
+            else
+            {
+                if (movingSound.isPlaying == false)
+                {
+                    feedingSound.Stop();
+                    movingSound.Play();
+                    movingSound.loop = true;
+                }
             }
         }
+    }
+
+    public void SetIsFeeding(bool shallFeed)
+    {
+        isFeeding = shallFeed;
     }
 }
