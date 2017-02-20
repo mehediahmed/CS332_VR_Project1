@@ -39,4 +39,9 @@ public class ShadowEnemy_Movement : MonoBehaviour
     {
         playerObject = obj;
     }
+
+    public GameObject GetPlayerObject()
+    {
+        return playerObject;
+    }
 }

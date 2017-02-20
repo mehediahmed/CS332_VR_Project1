@@ -1,5 +1,5 @@
-﻿//Author Josiah Erikson
-//Enemy sound script
+﻿// Author(s): Josiah Erikson
+// Enemy sound script
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +14,7 @@ public class EnemySound : MonoBehaviour
     private void Awake()
     {
         myAudio = GetComponent<AudioSource>();
-        player = GameObject.FindWithTag("MainCamera");
+        player = GetComponent<ShadowEnemy_Movement>().GetPlayerObject();
         Vector3 playerpos = player.transform.position;
         //Debug.Log("Playerpos is " + playerpos);
         //Debug.Log("Transform position is " + transform.position);
