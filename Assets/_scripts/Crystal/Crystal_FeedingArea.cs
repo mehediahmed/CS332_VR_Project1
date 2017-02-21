@@ -49,8 +49,8 @@ public class Crystal_FeedingArea : MonoBehaviour
         {
             enemyFeedingCount -= 1;
             other.gameObject.GetComponent<EnemySound>().SetIsFeeding(false);
-            Debug.Log("Feeding Area: Enemy exited trigger.");
-            Debug.Log("Crystal enemyFeedingCount: " + enemyFeedingCount);
+            //Debug.Log("Feeding Area: Enemy exited trigger.");
+            //Debug.Log("Crystal enemyFeedingCount: " + enemyFeedingCount);
         }
     }
 
@@ -59,13 +59,16 @@ public class Crystal_FeedingArea : MonoBehaviour
         if (isPassiveLight)
         {
             // Set the feeding area's base radius to that of the passive light.
-            feedingArea.radius = woePassive.GetRadius() + enemyFeedingRadius;
+            //feedingArea.radius = woePassive.GetRadius() + enemyFeedingRadius;
+            feedingArea.radius = PassiveLight.range + enemyFeedingRadius;
         }
         else
         {
             // Set the feeding area's base radius to that of the active light.
-            feedingArea.radius = woeActive.GetRadius() + enemyFeedingRadius;
+            //feedingArea.radius = woeActive.GetRadius() + enemyFeedingRadius;
+            feedingArea.radius = ActiveLight.range + enemyFeedingRadius;
         }
+        //Debug.Log("Crystal_FeedingArea UpdateRadius() new trigger radius: " + feedingArea.radius);
     }
 
     public float GetChargeDrain()

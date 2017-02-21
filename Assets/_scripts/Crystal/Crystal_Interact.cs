@@ -44,7 +44,8 @@ public class Crystal_Interact : VRTK_InteractableObject
     void Start()
     {
         // Create the feeding area object.
-        GameObject feedingAreaObject = Instantiate(new GameObject(), new Vector3(0, 0, 0), Quaternion.identity);
+        GameObject feedingAreaObject = new GameObject();
+        //GameObject feedingAreaObject = Instantiate(new GameObject(), new Vector3(0, 0, 0), Quaternion.identity);
         feedingArea = feedingAreaObject.AddComponent<Crystal_FeedingArea>();
         feedingArea.PassVariables(ActiveLight, PassiveLight, gameObject, enemyFeedingRadius, enemyFeedingRate);
         feedingArea.name = name + "_FeedingArea";
