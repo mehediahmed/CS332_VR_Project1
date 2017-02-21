@@ -1,6 +1,9 @@
 ﻿// Author(s): Paul Calande
 // Script for a crystal's feeding area.
 
+// Comment out the following line to disable debug log messages about triggers.
+//#define ENABLE_TRIGGER_MESSAGES
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,8 +41,11 @@ public class Crystal_FeedingArea : MonoBehaviour
         {
             enemyFeedingCount += 1;
             other.gameObject.GetComponent<EnemySound>().SetIsFeeding(true);
+
+#if ENABLE_TRIGGER_MESSAGES
             Debug.Log("Feeding Area: Enemy entered trigger.");
             Debug.Log("Crystal enemyFeedingCount: " + enemyFeedingCount);
+#endif
         }
     }
 
@@ -49,8 +55,11 @@ public class Crystal_FeedingArea : MonoBehaviour
         {
             enemyFeedingCount -= 1;
             other.gameObject.GetComponent<EnemySound>().SetIsFeeding(false);
-            //Debug.Log("Feeding Area: Enemy exited trigger.");
-            //Debug.Log("Crystal enemyFeedingCount: " + enemyFeedingCount);
+
+#if ENABLE_TRIGGER_MESSAGES
+            Debug.Log("Feeding Area: Enemy exited trigger.");
+            Debug.Log("Crystal enemyFeedingCount: " + enemyFeedingCount);
+#endif
         }
     }
 
