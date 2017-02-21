@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 4261324724649744}
   - component: {fileID: 108390601910931622}
   - component: {fileID: 114851513303057494}
+  - component: {fileID: 114557195938179222}
   m_Layer: 0
   m_Name: Point light
   m_TagString: Untagged
@@ -957,6 +958,7 @@ GameObject:
   - component: {fileID: 114183046629401082}
   - component: {fileID: 114291759623951154}
   - component: {fileID: 114395222764361064}
+  - component: {fileID: 114110708007068020}
   m_Layer: 0
   m_Name: PlayArea
   m_TagString: Untagged
@@ -1687,7 +1689,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1806916232922566}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 14.556472, y: 1.6217016, z: 113.07074}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4958529478002020}
@@ -2163,6 +2165,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   customRigidbodyObject: {fileID: 0}
+--- !u!114 &114110708007068020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1968149281537684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c6cf9b165fed2b4aab2660b44bcbd1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114166652351911986
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2360,6 +2373,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: 0
+--- !u!114 &114557195938179222
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1144173584379842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db55b6b1227b08844bad70cf1d4942dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114589838930491666
 MonoBehaviour:
   m_ObjectHideFlags: 1
