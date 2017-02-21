@@ -38,13 +38,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4028578320785996}
   - component: {fileID: 54773855530243416}
-  - component: {fileID: 82143914222423508}
-  - component: {fileID: 82542805124135220}
   - component: {fileID: 114165777567609638}
   - component: {fileID: 114324213109171944}
   - component: {fileID: 114361843046084132}
   - component: {fileID: 114748320887396576}
   - component: {fileID: 114214853334896064}
+  - component: {fileID: 82143914222423508}
+  - component: {fileID: 82542805124135220}
   m_Layer: 2
   m_Name: Crystal
   m_TagString: Untagged
@@ -493,9 +493,10 @@ MonoBehaviour:
   RechargeRate: 5
   maxCharges: 100
   minimumThreshold: 1
+  enemyFeedingRadius: 1
+  enemyFeedingRate: 6
   crystalThrum: {fileID: 82143914222423508}
   activatedCrystal: {fileID: 82542805124135220}
-  feedingAreaObject: {fileID: 0}
 --- !u!114 &114179861997211244
 MonoBehaviour:
   m_ObjectHideFlags: 1

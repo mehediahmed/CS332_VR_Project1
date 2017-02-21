@@ -38,6 +38,7 @@ public class Crystal_FeedingArea : MonoBehaviour
         {
             enemyFeedingCount += 1;
             other.gameObject.GetComponent<EnemySound>().SetIsFeeding(true);
+            Debug.Log("Feeding Area: Enemy entered trigger.");
             Debug.Log("Crystal enemyFeedingCount: " + enemyFeedingCount);
         }
     }
@@ -48,6 +49,7 @@ public class Crystal_FeedingArea : MonoBehaviour
         {
             enemyFeedingCount -= 1;
             other.gameObject.GetComponent<EnemySound>().SetIsFeeding(false);
+            Debug.Log("Feeding Area: Enemy exited trigger.");
             Debug.Log("Crystal enemyFeedingCount: " + enemyFeedingCount);
         }
     }
@@ -88,5 +90,8 @@ public class Crystal_FeedingArea : MonoBehaviour
         woePassive = PassiveLight.GetComponent<Light_WardOffEnemies>();
         feedingArea = gameObject.AddComponent<CapsuleCollider>();
         feedingArea.isTrigger = true;
+        // Add a rigidbody to allow the trigger to detect enemies.
+        Rigidbody rb = gameObject.AddComponent<Rigidbody>();
+        rb.isKinematic = false;
     }
 }
