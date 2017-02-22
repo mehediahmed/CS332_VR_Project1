@@ -493,8 +493,8 @@ MonoBehaviour:
   RechargeRate: 5
   maxCharges: 100
   minimumThreshold: 1
-  enemyFeedingRadius: 1
-  enemyFeedingRate: 2
+  enemyFeedingRadius: 2
+  enemyFeedingRate: 3
   crystalThrum: {fileID: 82143914222423508}
   activatedCrystal: {fileID: 82542805124135220}
 --- !u!114 &114179861997211244

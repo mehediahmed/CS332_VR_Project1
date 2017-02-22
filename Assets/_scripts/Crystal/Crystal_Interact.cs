@@ -1,5 +1,8 @@
 ﻿// Author(s): Paul Calande, Mehedi Ahmed, Josiah Erikson
 
+// Comment out the following line to prevent the crystal's charge from being printed every frame.
+//#define PRINT_CHARGES
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -43,8 +46,8 @@ public class Crystal_Interact : VRTK_InteractableObject
 
     // A static list of the active crystals in the scene.
     private static List<GameObject> activeCrystals = new List<GameObject>();
-    // A list of the enemies that are feeding on the light.
-    private List<GameObject> enemiesFeeding = new List<GameObject>();
+    // A collection of the enemies that are feeding on the light.
+    private HashSet<GameObject> enemiesFeeding = new HashSet<GameObject>();
     // The combined radius of the light with the feeding radius.
     private float enemyFeedingTotalRadius;
 
@@ -103,7 +106,11 @@ public class Crystal_Interact : VRTK_InteractableObject
         }
         // Drain the charge based on the number of enemies that are feeding.
         charges -= GetChargeDrain() * Time.deltaTime;
-        //Debug.Log("Crystal charges: " + charges);
+
+#if PRINT_CHARGES
+        Debug.Log("Crystal charges: " + charges + " with " + enemiesFeeding.Count + " enemies feeding.");
+#endif
+
     }
 
     public override void StartUsing(GameObject currentUsingObject)

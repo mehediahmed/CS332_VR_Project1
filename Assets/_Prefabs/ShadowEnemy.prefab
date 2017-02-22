@@ -257,6 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundDistance: 10
+  doAudioFrequency: 0.5
 --- !u!114 &114716998451025494
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -269,6 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   despawnDistance: 30
+  crystalCheckFrequency: 1
 --- !u!136 &136063861415032126
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -290,7 +292,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1637309201625868}
   m_Enabled: 0
   m_Radius: 0.5
-  m_Speed: 3
+  m_Speed: 0.2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

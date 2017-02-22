@@ -14,6 +14,8 @@ public class ShadowEnemy_Movement : MonoBehaviour
 {
     // The distance away from the player at which the enemy will despawn.
     public float despawnDistance;
+    // The time (in seconds) between each check for nearby crystals. Raising this number decreases accuracy but increases performance.
+    public float crystalCheckFrequency;
 
     // Reference to the player object.
     private GameObject playerObject;
@@ -72,14 +74,19 @@ public class ShadowEnemy_Movement : MonoBehaviour
         while (true)
         {
             isFeeding = false;
-            foreach (GameObject crystal in Crystal_Interact.GetActiveCrystals())
+            List<GameObject> crystals = Crystal_Interact.GetActiveCrystals();
+            foreach (GameObject crystal in crystals)
             {
                 Crystal_Interact ci = crystal.GetComponent<Crystal_Interact>();
                 float distance = Vector3.Distance(transform.position, crystal.transform.position);
                 float radius = ci.GetFeedingTotalRadius();
                 if (distance < radius)
                 {
-                    isFeeding = true;
+                    if (ci.getCharges() > ci.minimumThreshold)
+                    {
+                        // Only be in the "feeding" state when there's actually something to feed on.
+                        isFeeding = true;
+                    }
                     ci.AddEnemy(gameObject);
                 }
                 else
@@ -87,7 +94,7 @@ public class ShadowEnemy_Movement : MonoBehaviour
                     ci.RemoveEnemy(gameObject);
                 }
             }
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(crystalCheckFrequency);
         }
     }
 

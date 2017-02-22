@@ -8,6 +8,9 @@ public class EnemySound : MonoBehaviour
 {
     // How close the enemy must be to the player for the sound to play.
     public int soundDistance;
+    // The time in seconds between each DoAudio call.
+    // DoAudio changes the enemy sounds depending on whether the enemy is feeding or not.
+    public float doAudioFrequency;
 
     private AudioSource[] myAudio;
     private AudioSource feedingSound;
@@ -33,7 +36,7 @@ public class EnemySound : MonoBehaviour
         while (true)
         {
             DoAudio();
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(doAudioFrequency);
         }
     }
 
@@ -42,6 +45,7 @@ public class EnemySound : MonoBehaviour
         // Whether the enemy is feeding on light. This determines which sound to play.
         bool isFeeding = sem.GetIsFeeding();
 
+        /*
         Vector3 playerpos = player.transform.position;
         float playerDistance = Vector3.Distance(playerpos, transform.position);
         //Debug.Log("Playerpos is " + playerpos);
@@ -57,6 +61,7 @@ public class EnemySound : MonoBehaviour
         }
         //Otherwise, if it's not playing, start playing it
         else
+        */
         {
             // Debug.Log("Player is within range for playing sound");
             if (isFeeding)
