@@ -14,15 +14,15 @@ public class EnemySound : MonoBehaviour
     private AudioSource movingSound;
     // Reference to the player object.
     private GameObject player;
-    // Whether the enemy is feeding on light. This determines which sound to play.
-    private bool isFeeding = false;
+    private ShadowEnemy_Movement sem;
 
     private void Start()
     {
         myAudio = GetComponents<AudioSource>();
         feedingSound = myAudio[0];
         movingSound = myAudio[1];
-        player = GetComponent<ShadowEnemy_Movement>().GetPlayerObject();
+        sem = GetComponent<ShadowEnemy_Movement>();
+        player = sem.GetPlayerObject();
 
         StartCoroutine(PeriodicAudioCheck());
     }
@@ -33,12 +33,15 @@ public class EnemySound : MonoBehaviour
         while (true)
         {
             DoAudio();
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.2f);
         }
     }
 
     public void DoAudio()
     {
+        // Whether the enemy is feeding on light. This determines which sound to play.
+        bool isFeeding = sem.GetIsFeeding();
+
         Vector3 playerpos = player.transform.position;
         float playerDistance = Vector3.Distance(playerpos, transform.position);
         //Debug.Log("Playerpos is " + playerpos);
@@ -75,10 +78,5 @@ public class EnemySound : MonoBehaviour
                 }
             }
         }
-    }
-
-    public void SetIsFeeding(bool shallFeed)
-    {
-        isFeeding = shallFeed;
     }
 }

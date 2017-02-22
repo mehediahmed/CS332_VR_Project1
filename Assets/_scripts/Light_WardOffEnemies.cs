@@ -9,6 +9,9 @@ using UnityEngine.AI;
 [RequireComponent (typeof (Light))]
 public class Light_WardOffEnemies : MonoBehaviour
 {
+    // This constant is used for float comparisons since == is not viable for floats.
+    private const float approximatelyZero = 0.0001f;
+
     // Reference to a NavMeshObstacle component.
     private NavMeshObstacle obstacle;
     // Reference to the Light component.
@@ -37,10 +40,12 @@ public class Light_WardOffEnemies : MonoBehaviour
 
     public void UpdateObstacleRadius()
     {
-        // Set the obstacle radius to 0 if the light has no intensity.
-        if (lightComponent.intensity == 0)
+        //Debug.Log("Approximately zero: " + approximatelyZero);
+        // Set the obstacle radius to about 0 if the light has no intensity.
+        if (lightComponent.intensity <= approximatelyZero)
         {
-            obstacle.radius = 0;
+            // Navmesh obstacles cannot have a radius of exactly 0.
+            obstacle.radius = approximatelyZero;
         }
         else
         {

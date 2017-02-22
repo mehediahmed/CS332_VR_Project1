@@ -2,7 +2,7 @@
 // Script for a crystal's feeding area.
 
 // Comment out the following line to disable debug log messages about triggers.
-//#define ENABLE_TRIGGER_MESSAGES
+#define ENABLE_TRIGGER_MESSAGES
 
 using System.Collections;
 using System.Collections.Generic;

@@ -26,31 +26,40 @@ public class Crystal_Interact : VRTK_InteractableObject
     // The rate at which one enemy drains the crystal's charge.
     public float enemyFeedingRate;
 
+    // AudioSource references.
     private AudioSource[] sounds;
     public AudioSource crystalThrum;
     public AudioSource activatedCrystal;
 
     // Reference to the FeedingArea object's feeding area script component.
-    private Crystal_FeedingArea feedingArea;
+    //private Crystal_FeedingArea feedingArea;
 
     // Whether the crystal is currently in its "used" state.
     private bool isActive;
     // The quantity of charge that the crystal has left before burning out.
     private float charges;
-
     // Division is an expensive operation, so calculating this constant ahead of time will help performance. -Paul
-    private float intensityFactor = 1f / 12.5f;
+    private float intensityFactor;
+
+    // A static list of the active crystals in the scene.
+    private static List<GameObject> activeCrystals = new List<GameObject>();
+    // A list of the enemies that are feeding on the light.
+    private List<GameObject> enemiesFeeding = new List<GameObject>();
+    // The combined radius of the light with the feeding radius.
+    private float enemyFeedingTotalRadius;
 
     void Start()
     {
         // Create the feeding area object.
+        /*
         GameObject feedingAreaObject = new GameObject();
-        //GameObject feedingAreaObject = Instantiate(new GameObject(), new Vector3(0, 0, 0), Quaternion.identity);
         feedingArea = feedingAreaObject.AddComponent<Crystal_FeedingArea>();
         feedingArea.PassVariables(ActiveLight, PassiveLight, gameObject, enemyFeedingRadius, enemyFeedingRate);
         feedingArea.name = name + "_FeedingArea";
+        */
 
         // Initialize charges.
+        intensityFactor = 8f / maxCharges;
         charges = maxCharges;
         ResetLight();
 
@@ -77,6 +86,7 @@ public class Crystal_Interact : VRTK_InteractableObject
         if (charges < 0f)
         {
             charges = 0f;
+            //Debug.Log("Charges have dipped below zero!");
         }
         // If the charge runs out, automatically disable the light.
         if (charges == 0f)
@@ -92,7 +102,7 @@ public class Crystal_Interact : VRTK_InteractableObject
             charges += RechargeRate * Time.deltaTime;
         }
         // Drain the charge based on the number of enemies that are feeding.
-        charges -= feedingArea.GetChargeDrain() * Time.deltaTime;
+        charges -= GetChargeDrain() * Time.deltaTime;
         //Debug.Log("Crystal charges: " + charges);
     }
 
@@ -106,6 +116,20 @@ public class Crystal_Interact : VRTK_InteractableObject
     {
         base.StopUsing(previousUsingObject);
         ResetLight();
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        // When the crystal is enabled, add it to the active crystals list.
+        activeCrystals.Add(gameObject);
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        // When the crystal is disabled, remove it from the active crystals list.
+        activeCrystals.Remove(gameObject);
     }
 
     public void ActivateLight()
@@ -124,7 +148,7 @@ public class Crystal_Interact : VRTK_InteractableObject
                 activatedCrystal.loop = true;
             }
             // Set the feeding area's base radius to that of the active light.
-            feedingArea.UpdateRadius(false);
+            UpdateFeedingRadius(false);
         }
     }
 
@@ -137,12 +161,55 @@ public class Crystal_Interact : VRTK_InteractableObject
         // Stop the activated crystal sound.
         activatedCrystal.Stop();
         // Set the feeding area's base radius to that of the passive light.
-        feedingArea.UpdateRadius(true);
+        UpdateFeedingRadius(true);
     }
 
     public float getCharges()
     {
         return charges;
     }
-}
 
+    // Get the charge drain rate based on the number of enemies in the feeding radius.
+    private float GetChargeDrain()
+    {
+        return enemiesFeeding.Count * enemyFeedingRate;
+    }
+
+    public static List<GameObject> GetActiveCrystals()
+    {
+        return activeCrystals;
+    }
+
+    // The following two functions respectively add and remove an enemy from the enemies feeding list.
+    // This helps with keeping track of how many enemies are feeding on the light.
+    public void AddEnemy(GameObject enemy)
+    {
+        enemiesFeeding.Add(enemy);
+    }
+    public void RemoveEnemy(GameObject enemy)
+    {
+        enemiesFeeding.Remove(enemy);
+    }
+
+    // Update the radius of the feeding area.
+    private void UpdateFeedingRadius(bool isPassiveLight)
+    {
+        if (isPassiveLight)
+        {
+            // Set the feeding area's base radius to that of the passive light.
+            //feedingArea.radius = woePassive.GetRadius() + enemyFeedingRadius;
+            enemyFeedingTotalRadius = PassiveLight.range + enemyFeedingRadius;
+        }
+        else
+        {
+            // Set the feeding area's base radius to that of the active light.
+            //feedingArea.radius = woeActive.GetRadius() + enemyFeedingRadius;
+            enemyFeedingTotalRadius = ActiveLight.range + enemyFeedingRadius;
+        }
+    }
+
+    public float GetFeedingTotalRadius()
+    {
+        return enemyFeedingTotalRadius;
+    }
+}
