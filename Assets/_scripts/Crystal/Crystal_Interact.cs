@@ -155,7 +155,7 @@ public class Crystal_Interact : VRTK_InteractableObject
                 activatedCrystal.loop = true;
             }
             // Set the feeding area's base radius to that of the active light.
-            UpdateFeedingRadius(false);
+            UpdateFeedingRadius();
         }
     }
 
@@ -168,7 +168,7 @@ public class Crystal_Interact : VRTK_InteractableObject
         // Stop the activated crystal sound.
         activatedCrystal.Stop();
         // Set the feeding area's base radius to that of the passive light.
-        UpdateFeedingRadius(true);
+        UpdateFeedingRadius();
     }
 
     public float getCharges()
@@ -199,24 +199,46 @@ public class Crystal_Interact : VRTK_InteractableObject
     }
 
     // Update the radius of the feeding area.
-    private void UpdateFeedingRadius(bool isPassiveLight)
+    private void UpdateFeedingRadius()
     {
-        if (isPassiveLight)
-        {
-            // Set the feeding area's base radius to that of the passive light.
-            //feedingArea.radius = woePassive.GetRadius() + enemyFeedingRadius;
-            enemyFeedingTotalRadius = PassiveLight.range + enemyFeedingRadius;
-        }
-        else
+        if (isActive)
         {
             // Set the feeding area's base radius to that of the active light.
             //feedingArea.radius = woeActive.GetRadius() + enemyFeedingRadius;
             enemyFeedingTotalRadius = ActiveLight.range + enemyFeedingRadius;
         }
+        else
+        {
+            // Set the feeding area's base radius to that of the passive light.
+            //feedingArea.radius = woePassive.GetRadius() + enemyFeedingRadius;
+            enemyFeedingTotalRadius = PassiveLight.range + enemyFeedingRadius;
+        }
     }
 
+    // Get the radius of the current light combined with the radius of the feeding area.
     public float GetFeedingTotalRadius()
     {
         return enemyFeedingTotalRadius;
+    }
+
+    /*
+    // Get the radius of the current light.
+    public float GetCurrentLightRadius()
+    {
+        if (isActive)
+        {
+            return ActiveLight.range;
+        }
+        else
+        {
+            return PassiveLight.range;
+        }
+    }
+    */
+
+    // Get the radius of the passive light.
+    public float GetPassiveLightRadius()
+    {
+        return PassiveLight.range;
     }
 }
