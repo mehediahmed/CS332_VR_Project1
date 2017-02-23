@@ -33,6 +33,8 @@ public class ShadowEnemy_Movement : MonoBehaviour
     private float lastTimeInLight = 0f;
     // The amount of continuous time the enemy has spent inside of a crystal's passive light.
     private float continuedTimeInLight = 0f;
+    // Whether the enemy is inside of a crystal's passive light.
+    private bool isInLight = false;
 
     private void Awake()
     {
@@ -125,16 +127,24 @@ public class ShadowEnemy_Movement : MonoBehaviour
                 {
                     float currentTime = Time.time;
                     float timeSinceLastCheck = currentTime - lastTimeInLight;
-                    continuedTimeInLight += timeSinceLastCheck;
                     lastTimeInLight = currentTime;
-                    if (continuedTimeInLight > lightDespawnTime)
+                    if (isInLight)
                     {
-                        gameObject.SetActive(false);
+                        continuedTimeInLight += timeSinceLastCheck;
+                        if (continuedTimeInLight > lightDespawnTime)
+                        {
+                            gameObject.SetActive(false);
+                        }
+                    }
+                    else
+                    {
+                        isInLight = true;
                     }
                 }
                 else
                 {
                     continuedTimeInLight = 0f;
+                    isInLight = false;
                 }
             }
             yield return new WaitForSeconds(crystalCheckFrequency);
