@@ -256,7 +256,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d55ba1ef99fd2be4ab5d8dd83cd927ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundDistance: 10
   doAudioFrequency: 0.5
 --- !u!114 &114716998451025494
 MonoBehaviour:
@@ -273,7 +272,8 @@ MonoBehaviour:
   damageDistance: 0.5
   damageRate: 1
   crystalCheckFrequency: 1
-  lightDespawnTime: 0
+  lightDespawnTime: 3
+  lightDespawnAdditionalRadius: 0.45
 --- !u!136 &136063861415032126
 CapsuleCollider:
   m_ObjectHideFlags: 1

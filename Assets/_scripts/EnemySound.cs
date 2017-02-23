@@ -7,7 +7,7 @@ using UnityEngine;
 public class EnemySound : MonoBehaviour
 {
     // How close the enemy must be to the player for the sound to play.
-    public int soundDistance;
+    //public int soundDistance;
     // The time in seconds between each DoAudio call.
     // DoAudio changes the enemy sounds depending on whether the enemy is feeding or not.
     public float doAudioFrequency;
@@ -25,7 +25,7 @@ public class EnemySound : MonoBehaviour
         feedingSound = myAudio[0];
         movingSound = myAudio[1];
         sem = GetComponent<ShadowEnemy_Movement>();
-        player = sem.GetPlayerObject();
+        //player = sem.GetPlayerObject();
 
         StartCoroutine(PeriodicAudioCheck());
     }

@@ -3,6 +3,10 @@
 
 // Comment out the following line to prevent console messages every time an enemy is enabled or disabled.
 //#define ENABLE_DISABLE_LOGGING
+// Comment out the following line to prevent debug messages about enemies and the passive lights of crystals.
+//#define PASSIVE_LIGHT_DEBUG
+// Comment out the following line to prevent debug messages about enemies' distance from crystals.
+//#define PASSIVE_LIGHT_DISTANCE_DEBUG
 
 using System.Collections;
 using System.Collections.Generic;
@@ -22,6 +26,9 @@ public class ShadowEnemy_Movement : MonoBehaviour
     public float crystalCheckFrequency;
     // The time (in seconds) before the enemy despawns inside of a crystal's light.
     public float lightDespawnTime;
+    // The additional radius to add to the passive light's effective despawn radius.
+    // Slightly smaller than the agent radius is usually a good value.
+    public float lightDespawnAdditionalRadius;
 
     // Reference to the player object.
     private GameObject playerObject;
@@ -35,6 +42,8 @@ public class ShadowEnemy_Movement : MonoBehaviour
     private float continuedTimeInLight = 0f;
     // Whether the enemy is inside of a crystal's passive light.
     private bool isInLight = false;
+    // The crystal that the enemy is currently inside the passive light of.
+    private GameObject passiveDespawnCrystal = null;
 
     private void Awake()
     {
@@ -106,11 +115,12 @@ public class ShadowEnemy_Movement : MonoBehaviour
                 Crystal_Interact ci = crystal.GetComponent<Crystal_Interact>();
                 float distance = Vector3.Distance(transform.position, crystal.transform.position);
                 float radiusFeeding = ci.GetFeedingTotalRadius();
-                float radiusPassiveLight = ci.GetPassiveLightRadius();
+                float radiusPassiveLight = ci.GetPassiveLightRadius() + lightDespawnAdditionalRadius;
+                bool chargesAboveMinimumThreshold = (ci.getCharges() > ci.minimumThreshold);
                 if (distance < radiusFeeding)
                 {
                     ci.AddEnemy(gameObject);
-                    if (ci.getCharges() > ci.minimumThreshold)
+                    if (chargesAboveMinimumThreshold)
                     {
                         // Only be in the "feeding" state when there's actually something to feed on.
                         isFeeding = true;
@@ -120,11 +130,20 @@ public class ShadowEnemy_Movement : MonoBehaviour
                 {
                     ci.RemoveEnemy(gameObject);
                 }
+
+#if PASSIVE_LIGHT_DISTANCE_DEBUG
+                Debug.Log("distance: " + distance + ", radiusPassiveLight: " + radiusPassiveLight + ", continuedTimeInLight: " + continuedTimeInLight);
+#endif
+
                 // Check if the enemy has been inside of the passive light for too long.
                 // If the enemy has been inside of the passive light for too long, despawn it.
                 // On the other hand, if it has been outside of the passive light for a while, reset its continuous timer.
-                if (distance < radiusPassiveLight)
+                if (distance < radiusPassiveLight && chargesAboveMinimumThreshold)
                 {
+#if PASSIVE_LIGHT_DEBUG
+                    Debug.Log("Enemy is in the passive light radius!");
+#endif
+
                     float currentTime = Time.time;
                     float timeSinceLastCheck = currentTime - lastTimeInLight;
                     lastTimeInLight = currentTime;
@@ -139,12 +158,17 @@ public class ShadowEnemy_Movement : MonoBehaviour
                     else
                     {
                         isInLight = true;
+                        passiveDespawnCrystal = crystal;
                     }
                 }
                 else
                 {
-                    continuedTimeInLight = 0f;
-                    isInLight = false;
+                    if (passiveDespawnCrystal == crystal)
+                    {
+                        continuedTimeInLight = 0f;
+                        isInLight = false;
+                        passiveDespawnCrystal = null;
+                    }
                 }
             }
             yield return new WaitForSeconds(crystalCheckFrequency);
