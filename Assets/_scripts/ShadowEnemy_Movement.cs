@@ -32,6 +32,8 @@ public class ShadowEnemy_Movement : MonoBehaviour
 
     // Reference to the player object.
     private GameObject playerObject;
+    // Reference to the player object's player component.
+    private Player playerObjectPlayer;
     // Reference to the NavMeshAgent component.
     private NavMeshAgent agent;
     // Whether the enemy is feeding on light.
@@ -53,6 +55,7 @@ public class ShadowEnemy_Movement : MonoBehaviour
     private void Start()
     {
         playerObject = Player.playerObject;
+        playerObjectPlayer = playerObject.GetComponent<Player>();
     }
 
     private void Update()
@@ -79,7 +82,7 @@ public class ShadowEnemy_Movement : MonoBehaviour
 
     private void DealPlayerDamage(float damage)
     {
-        // TODO: Interface with the player's life code.
+        playerObjectPlayer.TakeDamage(damage);
     }
 
     private void OnEnable()
