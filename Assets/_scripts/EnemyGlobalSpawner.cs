@@ -13,8 +13,6 @@ using UnityEngine.AI;
 
 public class EnemyGlobalSpawner : MonoBehaviour
 {
-    // Reference to the player object.
-    public GameObject playerObject;
     // The maximum number of shadow enemies that can be enabled at once.
     public int maxNumberOfEnemies;
     // The distance away from the player at which the enemy will spawn.
@@ -22,6 +20,8 @@ public class EnemyGlobalSpawner : MonoBehaviour
     // The time between each attempted enemy spawn, measured in seconds.
     public float timeBetweenEnemySpawns;
 
+    // Reference to the player object.
+    private GameObject playerObject;
     // Reference to the enemy object pool.
     private ObjectPool pool;
 
@@ -32,6 +32,8 @@ public class EnemyGlobalSpawner : MonoBehaviour
 
     private void Start()
     {
+        // Get the player object.
+        playerObject = Player.playerObject;
         // Get and populate the enemy pool.
         pool = GetComponent<ObjectPool>();
         pool.Populate(maxNumberOfEnemies);
@@ -130,7 +132,6 @@ public class EnemyGlobalSpawner : MonoBehaviour
                         enemy.transform.position = desiredPosition;
                         // Activate the enemy.
                         enemy.GetComponent<NavMeshAgent>().enabled = true;
-                        enemy.GetComponent<ShadowEnemy_Movement>().SetPlayerObject(playerObject);
                         enemy.SetActive(true);
                         // Return the reference to this enemy.
                         return enemy;

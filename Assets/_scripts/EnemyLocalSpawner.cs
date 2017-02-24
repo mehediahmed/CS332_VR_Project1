@@ -12,8 +12,6 @@ using UnityEngine.AI;
 
 public class EnemyLocalSpawner : MonoBehaviour
 {
-    // Reference to the player object.
-    public GameObject playerObject;
     // The maximum number of shadow enemies from this object's pool that can be enabled at once.
     public int maxNumberOfEnemies = 1;
     // The number of seconds before the first enemy spawn.
@@ -23,8 +21,13 @@ public class EnemyLocalSpawner : MonoBehaviour
     // The minimum distance away from the spawner the player must be before the enemy can spawn.
     public float spawnDistance = 10.0f;
 
+    // Reference to the player object.
+    private GameObject playerObject;
+    // The list of spawn locations.
     private List<Vector3> spawnLocations = new List<Vector3>();
+    // Reference to the object pool component.
     private ObjectPool pool;
+    // How many spawn locations this local enemy spawner has.
     private int numberOfSpawnLocations;
 
 #if SHOW_SPAWN_VECTORS
@@ -39,6 +42,8 @@ public class EnemyLocalSpawner : MonoBehaviour
 
     private void Start()
     {
+        // Get the player object.
+        playerObject = Player.playerObject;
         // Populate the enemy pool.
         pool.Populate(maxNumberOfEnemies);
         // Get the spawn locations.
@@ -149,7 +154,6 @@ public class EnemyLocalSpawner : MonoBehaviour
                         enemy.transform.position = desiredPosition;
                         // Activate the enemy.
                         enemy.GetComponent<NavMeshAgent>().enabled = true;
-                        enemy.GetComponent<ShadowEnemy_Movement>().SetPlayerObject(playerObject);
                         enemy.SetActive(true);
                         // Now we can get the heck out of this loop.
                         needsToSpawn = false;

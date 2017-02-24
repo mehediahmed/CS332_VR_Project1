@@ -30,7 +30,7 @@ public class ShadowEnemy_Movement : MonoBehaviour
     // Slightly smaller than the agent radius is usually a good value.
     public float lightDespawnAdditionalRadius;
 
-    // Reference to the player object. Should be the [CameraRig].
+    // Reference to the player object.
     private GameObject playerObject;
     // Reference to the NavMeshAgent component.
     private NavMeshAgent agent;
@@ -48,6 +48,11 @@ public class ShadowEnemy_Movement : MonoBehaviour
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+    }
+
+    private void Start()
+    {
+        playerObject = Player.playerObject;
     }
 
     private void Update()
@@ -75,17 +80,6 @@ public class ShadowEnemy_Movement : MonoBehaviour
     private void DealPlayerDamage(float damage)
     {
         // TODO: Interface with the player's life code.
-    }
-
-    public void SetPlayerObject(GameObject obj)
-    {
-        playerObject = obj;
-        // Get the player's life too.
-    }
-
-    public GameObject GetPlayerObject()
-    {
-        return playerObject;
     }
 
     private void OnEnable()

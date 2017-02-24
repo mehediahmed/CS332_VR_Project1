@@ -17,12 +17,14 @@ public class RopeGun : VRTK_InteractableObject
     public GameObject marker;
     // Reference to the rope prefab.
     public GameObject ropePrefab;
-    //Sounds for shooting and hitting
+    // The sounds for shooting and hitting.
     public AudioClip shootSound;
     public AudioClip hitSound;
-    //source of the sounds this gun will make
-    private AudioSource source;
+    // How far the rope gun can fire.
+    public float range;
 
+    // The source of the sounds this gun will make.
+    private AudioSource source;
     // Position of the raycast hit.
     private Vector3 pos;
     // The direction in which the gun will fire.
@@ -88,7 +90,7 @@ public class RopeGun : VRTK_InteractableObject
 #endif
 
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 10000f, targetLayer))
+        if (Physics.Raycast(ray, out hit, range, targetLayer))
         {
 #if RAYCAST_DEBUG
             Debug.DrawLine(transform.position, hit.point);
