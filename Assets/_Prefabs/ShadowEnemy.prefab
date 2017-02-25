@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   despawnDistance: 30
-  damageDistance: 2
+  damageDistance: 2.5
   damageRate: 20
   crystalCheckFrequency: 1
   lightDespawnTime: 3

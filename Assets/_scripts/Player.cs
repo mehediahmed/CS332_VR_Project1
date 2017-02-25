@@ -7,6 +7,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -16,11 +17,15 @@ public class Player : MonoBehaviour
     public float maxHealth;
     // How quickly the player's health regenerates, in health per second.
     public float healthRegenRate;
+    // The scene that the player goes to upon dying.
+    public string deathScene;
 
     // A baked calculation that helps determine how intense the watch's light should be.
     private float intensityFactor;
     // How much health the player has.
     private float health;
+    // The name of the scene that the player was previously on before they died.
+    private static string lastSceneBeforeDeath;
 
     private void Awake()
     {
@@ -30,6 +35,8 @@ public class Player : MonoBehaviour
         intensityFactor = 8f / maxHealth;
         // Initialize the health.
         health = maxHealth;
+        // Update the last scene before death.
+        lastSceneBeforeDeath = SceneManager.GetActiveScene().name;
     }
 
     private void Update()
@@ -48,6 +55,7 @@ public class Player : MonoBehaviour
         {
             // Game over.
             //Debug.Log("Player has died.");
+            SceneManager.LoadScene(deathScene);
         }
     }
 
@@ -58,5 +66,10 @@ public class Player : MonoBehaviour
 #endif
 
         health -= amount;
+    }
+
+    public static string GetLastSceneBeforeDeath()
+    {
+        return lastSceneBeforeDeath;
     }
 }
