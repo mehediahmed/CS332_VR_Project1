@@ -36,15 +36,20 @@ public class Constellation : MonoBehaviour
     {
         if (activated)
         {
-            alpha += fadeSpeed * Time.deltaTime;
-            if (alpha > alphaNeededForTransition)
-            {
-                GoToCredits();
-            }
+            IncrementAlpha();
             Color fadeColor = new Color(1f, 1f, 1f, alpha);
             GUI.color = fadeColor;
             GUI.depth = drawDepth;
             GUI.DrawTexture(new Rect(0f, 0f, Screen.width, Screen.height), fadeOverlay);
+        }
+    }
+
+    private void IncrementAlpha()
+    {
+        alpha += fadeSpeed * Time.deltaTime;
+        if (alpha > alphaNeededForTransition)
+        {
+            GoToCredits();
         }
     }
 
