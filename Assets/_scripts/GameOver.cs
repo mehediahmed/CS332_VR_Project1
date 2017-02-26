@@ -4,11 +4,19 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour
 {
-    private void Start()
+    // The message to be displayed on the game over screen.
+    public static string message = "If you're reading this particular string after dying, yell at Paul immediately.";
+
+    private void Awake()
     {
+        // Set the game over text to the appropriate string.
+        message += "\n\nRestarting...";
+        gameObject.GetComponent<Text>().text = message;
+        // Start the respawn timer.
         StartCoroutine(RespawnTimer());
     }
 

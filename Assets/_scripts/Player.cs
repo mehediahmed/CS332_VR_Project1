@@ -53,9 +53,8 @@ public class Player : MonoBehaviour
         // If the player runs out of health...
         if (health < 0f)
         {
-            // Game over.
-            //Debug.Log("Player has died.");
-            SceneManager.LoadScene(deathScene);
+            GameOver.message = "You were caught by the Hollows.";
+            Die();
         }
     }
 
@@ -71,5 +70,12 @@ public class Player : MonoBehaviour
     public static string GetLastSceneBeforeDeath()
     {
         return lastSceneBeforeDeath;
+    }
+
+    public void Die()
+    {
+        // Game over.
+        //Debug.Log("Player has died.");
+        SceneManager.LoadScene(deathScene);
     }
 }
