@@ -334,7 +334,12 @@ namespace VRTK
             ToggleHighlightAlias(state, modelElementPaths.systemMenuModelPath, highlight, duration);
             ToggleHighlightAlias(state, modelElementPaths.bodyModelPath, highlight, duration);
         }
+        public void CancelHapticPusleGlobal()
+        {
+            CancelHapticPulse();
 
+
+        }
         /// <summary>
         /// The TriggerHapticPulse/1 method calls a single haptic pulse call on the controller for a single tick.
         /// </summary>

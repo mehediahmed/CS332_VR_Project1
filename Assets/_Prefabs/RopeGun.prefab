@@ -189,9 +189,10 @@ GameObject:
   - component: {fileID: 114411343565219554}
   - component: {fileID: 114018936964033112}
   - component: {fileID: 82268129411773062}
+  - component: {fileID: 135268108387844416}
   m_Layer: 0
   m_Name: RopeGun
-  m_TagString: Untagged
+  m_TagString: RopeGun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -476,7 +477,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1328219079622282}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.94, y: 5.989, z: 78.01}
+  m_LocalPosition: {x: -86.5, y: 0.993, z: 33.864}
   m_LocalScale: {x: 8, y: 8, z: 8}
   m_Children:
   - {fileID: 4109894094593286}
@@ -1363,3 +1364,15 @@ MonoBehaviour:
   shootSound: {fileID: 8300000, guid: f227ed3c8464c5c4d9e7317acee00f66, type: 3}
   hitSound: {fileID: 8300000, guid: 517b50036f8343548a972e34a2123183, type: 3}
   range: 10000
+--- !u!135 &135268108387844416
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1328219079622282}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.02
+  m_Center: {x: 0.015, y: 0.01, z: 0}
