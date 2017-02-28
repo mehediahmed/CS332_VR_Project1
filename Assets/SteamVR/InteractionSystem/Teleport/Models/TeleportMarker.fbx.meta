@@ -41,6 +41,10 @@ ModelImporter:
     4300006: locked_icon
     4300008: switch_scenes_icon
     4300010: move_location_icon
+    6400000: locked_icon
+    6400002: move_location_icon
+    6400004: switch_scenes_icon
+    6400006: teleport_marker_mesh
     7400000: switch_scenes_idle
     7400002: move_location_idle
     7400004: locked_idle
@@ -198,7 +202,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -218,6 +222,7 @@ ModelImporter:
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
+    serializedVersion: 2
     human: []
     skeleton: []
     armTwist: 0.5
@@ -228,7 +233,10 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 1
   humanoidOversampling: 1
