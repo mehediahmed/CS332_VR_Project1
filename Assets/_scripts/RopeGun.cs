@@ -109,6 +109,18 @@ public class RopeGun : VRTK_InteractableObject
 
     public void SpawnRope()
     {
+        // Make sure to force the player to let go of the old rope before it disappears.
+        // If a different rope exists...
+        if (rope != null)
+        {
+            // If the rope is being grabbed...
+            if (rope.GetComponent<VRTK_InteractableObject>().IsGrabbed() == true)
+            {
+                // Force the player to let go.
+                rope.GetComponent<VRTK_InteractGrab>().ForceRelease();
+            }
+        }
+
         if (!isTargetSet)
         {
             DestroyOldRope();
