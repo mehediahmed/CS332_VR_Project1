@@ -20,6 +20,7 @@ public class RopeGun : VRTK_InteractableObject
     // The sounds for shooting and hitting.
     public AudioClip shootSound;
     public AudioClip hitSound;
+    public AudioClip missSound;
     // How far the rope gun can fire.
     public float range;
 
@@ -104,6 +105,11 @@ public class RopeGun : VRTK_InteractableObject
                 SpawnRope();
                 source.PlayOneShot(hitSound);
             }
+        }
+        //If the ray didn't hit, play the miss sound
+        else
+        {
+            source.PlayOneShot(missSound);
         }
     }
 
