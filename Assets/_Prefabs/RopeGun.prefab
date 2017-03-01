@@ -1363,6 +1363,7 @@ MonoBehaviour:
   ropePrefab: {fileID: 1559836002716310, guid: 3def3a4278e764145aa036aee7bbfc28, type: 2}
   shootSound: {fileID: 8300000, guid: f227ed3c8464c5c4d9e7317acee00f66, type: 3}
   hitSound: {fileID: 8300000, guid: 517b50036f8343548a972e34a2123183, type: 3}
+  missSound: {fileID: 8300000, guid: 5be58e45a4bfc1346932310fc65ee8a7, type: 3}
   range: 10000
 --- !u!135 &135268108387844416
 SphereCollider:
