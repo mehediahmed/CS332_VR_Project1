@@ -51,9 +51,14 @@ public class ShadowEnemy_Movement : MonoBehaviour
     // The crystal that the enemy is currently inside the passive light of.
     private GameObject passiveDespawnCrystal = null;
 
+    //Animation control
+    private Animator anim;
+     
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
     }
 
     private void Start()
@@ -82,10 +87,13 @@ public class ShadowEnemy_Movement : MonoBehaviour
             // DO MURDER!
             DealPlayerDamage(damageRate * Time.deltaTime);
             isAttacking = true;
+            anim.Play("Attacking");
         }
         else
         {
             isAttacking = false;
+            anim.Play("Idle");
+
         }
     }
 
