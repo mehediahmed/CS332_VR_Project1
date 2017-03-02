@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114322586563180710}
   - component: {fileID: 114990263885560114}
   - component: {fileID: 82050049913990662}
-  - component: {fileID: 114444610073274548}
+  - component: {fileID: 114899684629244184}
   m_Layer: 8
   m_Name: pCube2
   m_TagString: Untagged
@@ -336,7 +336,7 @@ MonoBehaviour:
   throwVelocityWithAttachDistance: 0
   throwMultiplier: 35
   onGrabCollisionDelay: 0
---- !u!114 &114444610073274548
+--- !u!114 &114899684629244184
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
