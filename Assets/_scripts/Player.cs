@@ -19,8 +19,6 @@ public class Player : MonoBehaviour
     public float healthRegenRate;
     // The scene that the player goes to upon dying.
     public string deathScene;
-    // The sound that plays when the player dies
-    public AudioClip deathSound;
 
     // A baked calculation that helps determine how intense the watch's light should be.
     private float intensityFactor;
@@ -41,8 +39,6 @@ public class Player : MonoBehaviour
         health = maxHealth;
         // Update the last scene before death.
         lastSceneBeforeDeath = SceneManager.GetActiveScene().name;
-        //Get the Audio Source
-        source = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -82,10 +78,6 @@ public class Player : MonoBehaviour
     {
         // Game over.
         //Debug.Log("Player has died.");
-        //Stop playing the background music and play the Death music
-        source.Stop();
-        source.PlayOneShot(deathSound);
         SceneManager.LoadScene(deathScene);
-        
     }
 }
