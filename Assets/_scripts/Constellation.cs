@@ -12,8 +12,6 @@ public class Constellation : MonoBehaviour
     public string creditsScene;
     // How quickly the overlay fades in. Larger = faster.
     public float fadeSpeed;
-    // The texture that covers the screen during the fade out.
-    public Texture2D fadeOverlay;
     // How much alpha is needed before the game goes to the credits scene.
     public float alphaNeededForTransition;
 
@@ -21,8 +19,6 @@ public class Constellation : MonoBehaviour
     private bool activated = false;
     // The alpha of the overlay.
     private float alpha = 0f;
-    // The draw depth of the overlay.
-    private int drawDepth = -1000000;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -32,15 +28,15 @@ public class Constellation : MonoBehaviour
         }
     }
 
-    private void OnGUI()
+    private void Update()
     {
         if (activated)
         {
             IncrementAlpha();
+            // Calculate the new color based on the alpha.
             Color fadeColor = new Color(1f, 1f, 1f, alpha);
-            GUI.color = fadeColor;
-            GUI.depth = drawDepth;
-            GUI.DrawTexture(new Rect(0f, 0f, Screen.width, Screen.height), fadeOverlay);
+            // Update the UICanvas image for the white overlay.
+            WhiteFade.img.color = fadeColor;
         }
     }
 

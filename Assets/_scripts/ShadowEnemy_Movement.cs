@@ -30,6 +30,10 @@ public class ShadowEnemy_Movement : MonoBehaviour
     // Slightly smaller than the agent radius is usually a good value.
     public float lightDespawnAdditionalRadius;
 
+    // Whether the enemy is currently attacking the player. Use this variable for state machines.
+    [System.NonSerialized]
+    public bool isAttacking = false;
+
     // Reference to the player object.
     private GameObject playerObject;
     // Reference to the player object's player component.
@@ -47,9 +51,14 @@ public class ShadowEnemy_Movement : MonoBehaviour
     // The crystal that the enemy is currently inside the passive light of.
     private GameObject passiveDespawnCrystal = null;
 
+    //Animation control
+    private Animator anim;
+     
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
     }
 
     private void Start()
@@ -77,6 +86,14 @@ public class ShadowEnemy_Movement : MonoBehaviour
         {
             // DO MURDER!
             DealPlayerDamage(damageRate * Time.deltaTime);
+            isAttacking = true;
+            anim.Play("Attacking");
+        }
+        else
+        {
+            isAttacking = false;
+            anim.Play("Idle");
+
         }
     }
 
