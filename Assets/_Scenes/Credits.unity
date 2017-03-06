@@ -163,19 +163,19 @@ MonoBehaviour:
     -=-\r\n\r\nAidan Alice West\r\n\r\n-=- ART -=-\r\n\r\nMaria Lopez\r\n\r\nNick
     Criscuolo\r\n\r\n-=- PROGRAMMING -=-\r\n\r\nPaul Calande\r\n\r\nMehedi Ahmed\r\n\r\nJosiah
     Erikson\r\n\r\n-=- AUDIO DESIGN -=\r\n\r\nJosiah Erikson\r\n\r\n-=- GAME DESIGN
-    -=-\r\n\r\nEverybody\r\n\r\n-=- LEVEL DESIGN -=-\r\n\r\nAidan Alice West\r\n\r\nMehedi
-    Ahmed\r\n\r\n-=- WEBSITE DESIGN -=-\r\n\r\nNick Criscuolo\r\n(and a bit of Josiah
-    Erikson too)\r\n\r\n\r\n-=-=- INDIVIDUAL CONTRIBUTIONS -=-=-\r\n\r\n-=- 2D ART
-    -=-\r\n\r\nWebsite art: Nick Criscuolo\r\n\r\nCave textures: Nick Criscuolo\r\n\r\n-=-
-    3D MODELS -=-\r\n\r\nCave pieces: Maria Lopez, 3rd party resources\r\n\r\nCrystals:
-    3rd party resources\r\n\r\nHandholds: Maria Lopez\r\n\r\nWatch: Maria Lopez\r\n\r\nRope
-    Gun: Nick Criscuolo\r\n\r\nEnemies: Nick Criscuolo\r\n\r\n-=- PROGRAMMING -=-\r\n\r\nEnemy
+    -=-\r\n\r\nEverybody\r\n\r\n-=- LEVEL DESIGN -=-\r\n\r\nAidan Alice West\r\n\r\n-=-
+    WEBSITE DESIGN -=-\r\n\r\nNick Criscuolo\r\n(and a bit of Josiah Erikson too)\r\n\r\n\r\n-=-=-
+    INDIVIDUAL CONTRIBUTIONS -=-=-\r\n\r\n-=- 2D ART -=-\r\n\r\nWebsite art: Nick
+    Criscuolo\r\n\r\nCave textures: Nick Criscuolo\r\n\r\n-=- 3D MODELS -=-\r\n\r\nCave
+    pieces: Maria Lopez, 3rd party resources\r\n\r\nCrystals: 3rd party resources\r\n\r\nHandholds:
+    Maria Lopez\r\n\r\nWatch: Maria Lopez\r\n\r\nRope Gun: Nick Criscuolo\r\n\r\nEnemies:
+    Nick Criscuolo\r\n\r\nConstellation: Nick Criscuolo\r\n\r\n-=- PROGRAMMING -=-\r\n\r\nEnemy
     AI: Paul Calande\r\n\r\nObject Pooling: Paul Calande\r\n\r\nLocal Enemy Spawners:
     Paul Calande\r\n\r\nGlobal Enemy Spawners: Paul Calande\r\n\r\nPlayer's Health
     System: Paul Calande\r\n\r\nGame Over/Player Death: Paul Calande\r\n\r\nCredits:
     Paul Calande\r\n\r\nFalling Death Trigger: Paul Calande\r\n\r\nClimbing: Mehedi
     Ahmed\r\n\r\nCrystals: Mehedi Ahmed, Paul Calande\r\n\r\nRope Gun: Mehedi Ahmed,
-    Paul Calande\r\n\r\nLighting System: Mehedi Ahmed\r\n\r\nConstellation/Ending:
+    Paul Calande\r\n\r\nLighting System: Mehedi Ahmed\r\n\r\nHip Holster: Mehedi Ahmed\r\n\r\nConstellation/Ending:
     Paul Calande\r\n\r\nAudio Implementation: Josiah Erikson\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nThanks
     for playing!"
 --- !u!222 &311888429
